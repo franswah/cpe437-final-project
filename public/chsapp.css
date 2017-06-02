@@ -1,0 +1,8 @@
+.msg-header {
+   clear: both;
+   background-color: #EEF;
+}
+
+.nav>li {
+   display:inline;
+}

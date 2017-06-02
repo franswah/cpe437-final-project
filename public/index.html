@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CHS</title>
+</head>
+<script src="bower_components/angular/angular.min.js"></script>
+<script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css"></script>
+
+<script src="chsapp.js"></script>
+<link rel="stylesheet" href="chsapp.css"></script>
+
+<script src="Util/notifyDlg.js"></script>
+<script src="Home/homeController.js"></script>
+<script src="Register/registerController.js"></script>
+<script src="Login/loginController.js"></script>
+<script src="Login/loginService.js"></script>
+<script src="ui-routes.js"></script>
+
+<body ng-app="mainApp">
+   <nav class="navbar navbar-default">
+      <ul class="nav navbar-nav">
+         <li ng-if="!user">
+            <a ui-sref="login">Login</a>
+         </li>
+         <li ng-if="!user">
+            <a ui-sref="register">Register</a>
+         </li>
+         <li ng-if="!!user">
+            <a ui-sref="cnvOverview">All Conversations</a>
+         </li>
+         <li ng-if="!!user">
+            <a ui-sref="myCnvOverview">My Conversations</a>
+         </li>
+      </ul>
+      <ul class="nav navbar-nav pull-right">
+         <li ng-if="!!user" class="navbar-text">
+            {{user.firstName + " " + user.lastName}}
+         </li>
+         <li>
+            <a ng-if="!!user" ui-sref="logout">Logout</a>
+         </li>
+         <li>
+            <select class="navbar-text" ng-model="selectedLang" 
+             ng-options="x[selectedLang.tag] for x in languages">
+         </select>
+         </li>
+      </ul>
+      
+   </nav>
+   <ui-view/>
+</body>
+</html>

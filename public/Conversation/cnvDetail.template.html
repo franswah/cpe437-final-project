@@ -1,0 +1,17 @@
+<h2>{{ cnv.title }}</h2>
+<div class="list-group">
+   <div class="list-group-item" ng-repeat="msg in msgs">
+      <div class="msg-header">
+         {{ msg.whenMade | date:'medium'}} by {{ msg.email }}
+      </div>
+      <div class="msg-content">
+         {{ msg.content }}
+      </div>
+   </div>
+</div>
+<form>
+   <input type="textarea" class="form-control" name="input" ng-model="content"
+     rows="5" placeholder="New Message">
+   <button type="submit" class="btn btn-primary" ng-disabled="!content"
+    ng-click="send(content)" style="margin-top: 5px;">Send</button>
+</form>
