@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>CHS</title>
+    <title>EbList</title>
 </head>
 <script src="bower_components/angular/angular.min.js"></script>
 <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
 <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
 <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css"></script>
 
-<script src="chsapp.js"></script>
-<link rel="stylesheet" href="chsapp.css"></script>
+<script src="eblistapp.js"></script>
+<link rel="stylesheet" href="eblistapp.css"></script>
 
 <script src="Util/notifyDlg.js"></script>
 <script src="Home/homeController.js"></script>
@@ -28,10 +28,13 @@
             <a ui-sref="register">Register</a>
          </li>
          <li ng-if="!!user">
-            <a ui-sref="cnvOverview">All Conversations</a>
+            <a ui-sref="profile">My Profile</a>
          </li>
          <li ng-if="!!user">
-            <a ui-sref="myCnvOverview">My Conversations</a>
+            <a ui-sref="items">My Items</a>
+         </li>
+         <li ng-if="!!user">
+            <a ui-sref="search">Search</a>
          </li>
       </ul>
       <ul class="nav navbar-nav pull-right">

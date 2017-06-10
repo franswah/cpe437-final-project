@@ -30,5 +30,20 @@ app.config(['$stateProvider', '$urlRouterProvider',
          url: '/register',
          templateUrl: 'Register/register.template.html',
          controller: 'registerController',
+      })
+      .state('profile', {
+         url: '/profile',
+         templateUrl: 'Profile/profile.template.html',
+         controller: 'profileController',
+      })
+      .state('items', {
+         url: '/items',
+         templateUrl: 'Item/itemOverview.template.html',
+         controller: 'itemOverviewController',
+      })
+      .state('search', {
+         url: '/search',
+         templateUrl: 'Search/search.template.html',
+         controller: 'searchController',
       });
    }]);
