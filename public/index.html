@@ -13,9 +13,13 @@
 
 <script src="Util/notifyDlg.js"></script>
 <script src="Home/homeController.js"></script>
+<script src="Item/itemOverviewController.js"></script>
+<script src="Item/itemDetailController.js"></script>
 <script src="Register/registerController.js"></script>
 <script src="Login/loginController.js"></script>
 <script src="Login/loginService.js"></script>
+<script src="Profile/profileController.js"></script>
+<script src="Search/searchController.js"></script>
 <script src="ui-routes.js"></script>
 
 <body ng-app="mainApp">
@@ -43,11 +47,6 @@
          </li>
          <li>
             <a ng-if="!!user" ui-sref="logout">Logout</a>
-         </li>
-         <li>
-            <select class="navbar-text" ng-model="selectedLang" 
-             ng-options="x[selectedLang.tag] for x in languages">
-         </select>
          </li>
       </ul>
       
