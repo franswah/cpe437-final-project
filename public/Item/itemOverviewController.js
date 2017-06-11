@@ -1,7 +1,15 @@
-app.controller('cnvOverviewController',
- ['$scope', '$state', '$http', '$uibModal', 'notifyDlg', 'cnvs',
- function($scope, $state, $http, $uibM, nDlg, cnvs) {
-   var filterCnvs;
+app.controller('itemOverviewController',
+ ['$scope', '$state', '$http', '$uibModal', 'notifyDlg',
+ 'pageTitle', 'itemsToDisplay',
+ function($scope, $state, $http, $uibM, nDlg, pageTitle, itemsToDisplay) {
+   //Injected from stateParams being passed through resolve in ui-router
+   $scope.pageTitle = pageTitle;
+   $scope.itemsToDisplay = itemsToDisplay;
+
+
+    //EVERYTHING BELOW HERE IS OLD CHS CODE FOR REFERENCE, REMOVE WHEN DONE
+
+   /*var filterCnvs;
 
    if ($state.current.url === "/cnvs/mine") {
       $scope.mine = true;
@@ -89,5 +97,5 @@ app.controller('cnvOverviewController',
       .then(function(rsp) {
          $scope.cnvs = filterCnvs(rsp.data);
       })
-   };
+   };*/
 }]);

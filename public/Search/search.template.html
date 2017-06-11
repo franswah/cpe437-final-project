@@ -1,3 +1,24 @@
 <div>
+   <form>
+      <fieldset class="form-group">
+        <label>Search for:</label>
+        <input type="text" class="form-control" placeholder="Item"
+         ng-model="search.title">
+      </fieldset>
+      <fieldset class="form-group">
+        <label>within</label>
+        <input type="number" class="form-control" placeholder="10"
+         ng-model="search.radius">
+        <label>mile(s)</label>
+      </fieldset>
+      <fieldset class="form-group">
+         <label>in category</label>
+         <select ng-model="search.category"
+          ng-options="cat.id as cat.name for cat in allCategories">
+         </select>
+      </fieldset>
 
+  <button type="submit" class="btn btn-primary" ng-click="search()"
+   ng-disabled="!search.title">Search</button>
+</form>
 </div>
