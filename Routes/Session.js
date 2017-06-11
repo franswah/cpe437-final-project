@@ -15,6 +15,9 @@ var Session = function Session(user) {
    this.id = user.id;
    this.email = user.email;
    this.role = user.role;
+   this.zip = user.zip;
+   this.latitude = user.latitude;
+   this.longitude = user.longitude;
 
    this.loginTime = new Date().getTime();
    this.lastUsed = new Date().getTime();

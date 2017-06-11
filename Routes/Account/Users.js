@@ -6,6 +6,7 @@ var mysql = require('mysql');
 
 router.baseURL = '/Prss';
 
+var emailRegex =  /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
 
 /* Much nicer versions */
 router.get('/', function(req, res) {
@@ -19,19 +20,19 @@ router.get('/', function(req, res) {
 
    if (email) {
       if (admin)
-         req.cnn.chkQry('select id, email from Person where email like ?',
+         req.cnn.chkQry('select id, email from User where email like ?',
           [email + '%'],
           handler);
       else if (req.session.email.toLowerCase().startsWith(email.toLowerCase()))
-         req.cnn.chkQry('select id, email from Person where id = ?',
+         req.cnn.chkQry('select id, email from User where id = ?',
           [req.session.id], handler);
       else
          handler(null, []);
    }    
    else if (admin)
-      req.cnn.chkQry('select id, email from Person', handler);
+      req.cnn.chkQry('select id, email from User', handler);
    else
-      req.cnn.chkQry('select id, email from Person where id = ?',
+      req.cnn.chkQry('select id, email from User where id = ?',
        [req.session.id], handler);
 });
 
@@ -47,20 +48,22 @@ router.post('/', function(req, res) {
 
    async.waterfall([
    function(cb) { // Check properties and search for Email duplicates
-      if (vld.hasFields(body, ["email", "lastName", "password", "role"], cb) &&
+      if (vld.hasFields(body, ["email", "lastName", "password", "role", "zip"], cb) &&
        vld.chain(body.role === 0 || admin, Tags.noPermission)
        .chain(body.termsAccepted || admin, Tags.noTerms)
+       .chain(body.email.match(emailRegex), Tags.badValue, ["email"])
+       .chain(body.zip.match(/(^\d{5}$)/), Tags.badValue, ["zip"])
        .check(body.role >= 0 && body.role <= 1, Tags.badValue, ["role"], cb)) {
-         cnn.chkQry('select * from Person where email = ?', body.email, cb);
+         cnn.chkQry('select * from User where email = ?', body.email, cb);
       }
    },
-   function(existingPrss, fields, cb) {  // If no duplicates, insert new Person
+   function(existingPrss, fields, cb) {  // If no duplicates, insert new User
       if (vld.check(!existingPrss.length, Tags.dupEmail, null, cb)) {
          body.termsAccepted = body.termsAccepted && new Date();
-         cnn.chkQry('insert into Person set ?', body, cb);
+         cnn.chkQry('insert into User set ?', body, cb);
       }
    },
-   function(result, fields, cb) { // Return location of inserted Person
+   function(result, fields, cb) { // Return location of inserted User
       res.location(router.baseURL + '/' + result.insertId).end();
       cb();
    }],
@@ -75,7 +78,7 @@ router.get('/:id', function(req, res) {
 
    if (vld.checkPrsOK(req.params.id)) {
       req.cnn.query('select id, firstName, lastName, email, whenRegistered, ' +
-       'termsAccepted, role from Person where id = ?', [req.params.id],
+       'termsAccepted, role, zip from User where id = ?', [req.params.id],
       function(err, prsArr) {
          if (vld.check(prsArr.length, Tags.notFound))
             res.json(prsArr);
@@ -97,12 +100,12 @@ router.put('/:id', function(req, res) {
    function(cb) {
       if (vld.checkPrsOK(req.params.id, cb) &&
        vld.hasOnlyFields(body, 
-       ["firstName", "lastName", "password", "oldPassword", "role"])
+       ["firstName", "lastName", "password", "oldPassword", "role", "zip"])
        .chain(!body.role || admin, Tags.badValue, ["role"])
        .check(body.password === undefined || 
        (!(body.oldPassword === undefined) || admin), 
        Tags.noOldPwd, null, cb)) {
-         cnn.chkQry('select * from Person where id = ?',
+         cnn.chkQry('select * from User where id = ?',
           [req.params.id], cb);
       }
    },
@@ -112,7 +115,7 @@ router.put('/:id', function(req, res) {
        body.oldPassword === result[0].password || admin, 
        Tags.oldPwdMismatch, null, cb)) {
          delete body.oldPassword;
-         cnn.chkQry('update Person set ? where id = ?',
+         cnn.chkQry('update User set ? where id = ?',
           [body, req.params.id], cb);
       }
    },
@@ -129,7 +132,7 @@ router.delete('/:id', function(req, res) {
    var vld = req.validator;
 
    if (vld.checkAdmin())
-      req.cnn.query('DELETE from Person where id = ?', [req.params.id],
+      req.cnn.query('DELETE from User where id = ?', [req.params.id],
       function (err, result) {
          if (!err && vld.check(result.affectedRows, Tags.notFound))
             res.status(200).end();

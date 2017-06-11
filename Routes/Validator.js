@@ -22,7 +22,8 @@ Validator.Tags = {
    dupEnrollment: "dupEnrollment",  // Duplicate enrollment
    queryFailed: "queryFailed",
    forbiddenField: "forbiddenField",
-   oldPwdMismatch: "oldPwdMismatch"
+   oldPwdMismatch: "oldPwdMismatch",
+   invalidCategory: "invalidCategory"
 };
 
 // Check |test|.  If false, add an error with tag and possibly empty array
@@ -71,7 +72,7 @@ Validator.prototype.checkAdmin = function(cb) {
     Validator.Tags.noPermission, null, cb);
 };
 
-// Validate that AU is the specified person or is an admin
+// Validate that AU is the specified User or is an admin
 Validator.prototype.checkPrsOK = function(prsId, cb) {
 
    return this.check(this.session, Validator.Tags.noLogin, null, cb) &&
@@ -84,7 +85,7 @@ Validator.prototype.hasFields = function(obj, fieldList, cb) {
    var self = this;
 
    fieldList.forEach(function(name) {
-      self.chain(obj.hasOwnProperty(name), Validator.Tags.missingField,
+      self.chain(obj.hasOwnProperty(name) && obj[name].length !== 0, Validator.Tags.missingField,
        [name]);
    });
 
