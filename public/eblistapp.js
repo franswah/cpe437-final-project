@@ -47,16 +47,18 @@ app.filter('tagError', ['$rootScope', 'errMap',
    };
 }]);
 
-app.directive('cnvSummary', [function() {
+app.directive('myItems', [function() {
    return {
       restrict: 'E',
+      transclude: true,
       scope: {
-         cnv: "=toSummarize",
-         edit: "&onEdit",
-         delete: "&onDelete",
-         user: "=userInfo"
+         item: "=item",
+         user: '=user',
+         edit: '&editItem',
+         del: '&delItem'
       },
-      templateUrl: 'Conversation/cnvLine.template.html'
+
+      templateUrl: 'Item/itemLine.template.html'
    };
 }]);
 

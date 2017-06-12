@@ -1,11 +1,11 @@
 <a  href="#" ui-sref="cnvDetail({cnvId:{{cnv.id}}})">
-   {{cnv.title}} {{cnv.lastMessage | date : "medium"}}</a>
+   {{item.title}} {{item.postTime | date : "medium"}} {{item.price}}</a>
 
 <button type="button" class="btn btn-default pull-right"
- ng-show="user && user.id == cnv.ownerId" ng-click="delete($index)">
+ ng-show="user && user.id == item.ownerId" ng-click="delete($index)">
    <span class="glyphicon glyphicon-trash"></span>
 </button>
 <button type="button" class="btn btn-default btn-sm pull-right"
- ng-show="user && user.id == cnv.ownerId" ng-click="edit($index)">
+ ng-show="user && user.id == item.ownerId" ng-click="edit($index)">
    <span class="glyphicon glyphicon-edit"></span>
 </button>

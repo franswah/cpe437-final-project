@@ -1,0 +1,12 @@
+<h2>My Items</h2>
+<div class="list-group">
+   <div class="list-group-item" ng-repeat="item in items">
+      <my-items class="list-group-item" item="item" on-edit="editItem($index)"
+       on-delete="delItem($index)" user-info="user"></cnv-summary>
+   </div>
+</div>
+
+<button class="btn btn-primary" type="button" style="margin-top:5px" 
+ ng-click="newItem()">
+   Add New Item
+</button>

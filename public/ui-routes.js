@@ -44,7 +44,7 @@ app.config(['$stateProvider', '$urlRouterProvider',
             getItemsUrl: 'Items',
             getItemsParams: undefined
          },
-         templateUrl: 'Item/itemOverview.template.html',
+         templateUrl: 'Item/myItems.template.html',
          controller: 'itemOverviewController',
          resolve: {
             pageTitle: ['$stateParams', function($stateParams) {
