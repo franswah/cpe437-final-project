@@ -35,6 +35,7 @@ app.config(['$stateProvider', '$urlRouterProvider',
          url: '/profile',
          templateUrl: 'Profile/profile.template.html',
          controller: 'profileController',
+
       })
       .state('items', {
          url: '/items',

@@ -31,8 +31,9 @@ app.use(function (req, res, next) {
     (req.path === '/Users' || req.path === '/Ssns'))) {
       req.validator = new Validator(req, res);
       next();
-   } else
+   } else {
       res.status(401).end();
+   }
 });
 
 // Add DB connection, with smart chkQry method, to |req|

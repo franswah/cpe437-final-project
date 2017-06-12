@@ -4,7 +4,7 @@ var router = Express.Router({caseSensitive: true});
 var async = require('async');
 var mysql = require('mysql');
 
-router.baseURL = '/Prss';
+router.baseURL = '/Users';
 
 var emailRegex =  /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
 

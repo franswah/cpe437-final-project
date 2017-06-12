@@ -1,6 +1,6 @@
-drop database if exists jxfranci;
-create database jxfranci;
-use jxfranci;
+drop database if exists sesingh;
+create database sesingh;
+use sesingh;
 
 create table User (
    id int auto_increment primary key,
