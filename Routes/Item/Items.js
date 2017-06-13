@@ -2,7 +2,7 @@ var Express = require('express');
 var Tags = require('../Validator.js').Tags;
 var router = Express.Router({ caseSensitive: true });
 var async = require('async');
-var geolib = require('geolib');
+var utils = require('../Utils.js');
 
 router.baseURL = '/Items';
 
@@ -14,14 +14,7 @@ router.get('/', function (req, res) {
    req.cnn.query('select i.id, title, price, ownerId, zip, latitude, longitude,' +
     ' postTime, email, imageUrl from Item i join User u on ownerId = u.id',
       function (err, itemArr) {
-         var distance;
-
-         itemArr.forEach(function(item) {
-            distance = geolib.getDistanceSimple(req.session, item);
-            item.distance = distance / 1609.34;
-            delete item.longitude;
-            delete item.latitude;
-         });
+         utils.appendDistance(itemArr, req.session);
 
          res.json(itemArr);
          req.cnn.release();
@@ -39,13 +32,9 @@ router.get('/:itemId', function (req, res) {
     ' where i.id = ?', [req.params.itemId],
       function (err, itemArr) {
          if (vld.check(itemArr.length, Tags.notFound)) {
-            var item = itemArr[0];
-            var distance = geolib.getDistanceSimple(req.session, item);
-            item.distance = distance / 1609.34;
-            delete item.longitude;
-            delete item.latitude;
+            utils.appendDistance(itemArr, req.session);
 
-            res.json(item);
+            res.json(itemArr[0]);
             req.cnn.release();
          }
          

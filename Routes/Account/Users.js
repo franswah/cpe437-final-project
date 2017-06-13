@@ -3,6 +3,7 @@ var Tags = require('../Validator.js').Tags;
 var router = Express.Router({caseSensitive: true});
 var async = require('async');
 var mysql = require('mysql');
+var utils = require('../Utils');
 
 router.baseURL = '/Users';
 
@@ -141,6 +142,25 @@ router.delete('/:id', function(req, res) {
    else {
       req.cnn.release();
    }
+});
+
+router.get('/:userId/Items', function (req, res) {
+   var vld = req.validator;
+   var userId = req.params.userId;
+
+   if (vld.checkPrsOK(userId)) {
+      req.cnn.query('select i.id, title, price, ownerId, zip, latitude, longitude,' +
+       ' postTime, email, imageUrl from Item i join User u on ownerId = u.id' +
+       ' where ownerId = ?', [userId],
+       function (err, itemArr) {
+         utils.appendDistance(itemArr, req.session, true);
+
+         res.json(itemArr);
+         req.cnn.release();
+       }
+      );
+   }
+   
 });
 
 module.exports = router;

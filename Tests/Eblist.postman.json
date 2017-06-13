@@ -137,6 +137,7 @@
 				"b70efaae-e621-cc40-0dec-36cd494bf17c",
 				"e49ae4ab-b041-8849-c21b-45d369eabd6c",
 				"06f5ef1c-b1e0-e3a0-111c-48d924582820",
+				"d3ded319-811f-5293-0bbb-bf1b68d5a47e",
 				"43237dd3-05c1-5db4-c72b-672ef22765c4",
 				"9e63b348-e8cb-75e6-fa4a-864f0dfaf3ed",
 				"cb5be285-111a-afd0-ee76-216972e81203"
@@ -151,7 +152,6 @@
 			"order": [
 				"ad2395d7-e89f-7304-56c9-81539c1dcc25",
 				"2ddbf667-5819-1d62-6fcd-e132b60dbb11",
-				"d3ded319-811f-5293-0bbb-bf1b68d5a47e",
 				"27d66d71-8883-09ab-1542-6bad899bba9b",
 				"070552cb-aeb7-6da6-de69-5c7ed90b6e6b"
 			],
@@ -2089,17 +2089,20 @@
 		{
 			"id": "d3ded319-811f-5293-0bbb-bf1b68d5a47e",
 			"headers": "",
-			"url": "{{url}}/Users/3/Items",
+			"headerData": [],
+			"url": "{{url}}/Users/4/Items",
+			"queryParams": [],
 			"preRequestScript": null,
 			"pathVariables": {},
+			"pathVariableData": [],
 			"method": "GET",
 			"data": null,
 			"dataMode": "params",
-			"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;\n\nif(tests[\"Status code is 200\"]) {\n    var jsonData = JSON.parse(responseBody);\n    tests[\"Proper num returned\"] = jsonData.length === 1;\n    tests[\"Proper item returned\"] = jsonData[0].title === \"Couch\";\n}\n",
+			"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;\n\nif(tests[\"Status code is 200\"]) {\n    var jsonData = JSON.parse(responseBody);\n    tests[\"Proper num returned\"] = jsonData.length === 1;\n    tests[\"Proper item returned\"] = jsonData[0].title === \"Dairy Cow\";\n}\n",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1496996181046,
-			"name": "Get NY Student items",
+			"time": 1497341761917,
+			"name": "Get SLO Student items",
 			"description": "",
 			"collectionId": "54d87991-4933-06fd-3bdd-7aecd04f96e6"
 		},

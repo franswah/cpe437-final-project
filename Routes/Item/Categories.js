@@ -2,7 +2,7 @@ var Express = require('express');
 var Tags = require('../Validator.js').Tags;
 var router = Express.Router({ caseSensitive: true });
 var async = require('async');
-var geolib = require('geolib');
+var utils = require('../Utils.js');
 
 router.baseURL = '/Categories';
 
@@ -30,15 +30,7 @@ router.get('/:id/Items', function (req, res) {
     ' postTime, email, imageUrl from Item i join User u on ownerId = u.id' +
     ' where categoryId = ?', [req.params.id],
       function (err, itemArr) {
-         var distance;
-         
-
-         itemArr.forEach(function(item) {
-            distance = geolib.getDistanceSimple(req.session, item);
-            item.distance = distance / 1609.34;
-            delete item.longitude;
-            delete item.latitude;
-         });
+         utils.appendDistance(itemArr, req.session);
 
          res.json(itemArr);
          req.cnn.release();
