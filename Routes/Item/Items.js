@@ -26,6 +26,8 @@ router.get('/:itemId', function (req, res) {
    var dist = req.query.radius;
    var title = req.query.title;
 
+   
+
    req.cnn.query('select i.id, title, price, ownerId, zip, latitude,' +
    ' longitude, description, categoryId,' +
     ' postTime, email, imageUrl from Item i join User u on ownerId = u.id' +
@@ -35,9 +37,8 @@ router.get('/:itemId', function (req, res) {
             utils.appendDistance(itemArr, req.session);
 
             res.json(itemArr[0]);
-            req.cnn.release();
          }
-         
+         req.cnn.release();
       });
 });
 

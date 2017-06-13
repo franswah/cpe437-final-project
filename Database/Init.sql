@@ -26,7 +26,7 @@ create table Item (
    id int auto_increment primary key,
    ownerId int not null,
    categoryId int not null,
-   title varchar(80) not null,
+   title varchar(255) not null,
    description varchar(3000),
    price int not null,
    postTime datetime,

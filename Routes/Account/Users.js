@@ -160,7 +160,9 @@ router.get('/:userId/Items', function (req, res) {
        }
       );
    }
-   
+   else {
+      req.cnn.release();
+   }
 });
 
 module.exports = router;
