@@ -11,10 +11,8 @@ router.get('/', function (req, res) {
    var dist = req.query.radius;
    var title = req.query.title;
 
-   req.cnn.query('select i.id, title, price, ownerId, zip, latitude, longitude,' +
-    ' postTime, email, imageUrl from Item i join User u on ownerId = u.id',
-      function (err, itemArr) {
-         utils.appendDistance(itemArr, req.session);
+   var handler = function(err, itemArr) {
+      utils.appendDistance(itemArr, req.session);
 
          if (dist) {
             itemArr = utils.cutoffDistance(itemArr, dist);
@@ -22,7 +20,19 @@ router.get('/', function (req, res) {
 
          res.json(itemArr);
          req.cnn.release();
-      });
+   };
+
+   if (title) {
+      req.cnn.query('select i.id, title, price, ownerId, zip, latitude, longitude,' +
+      ' postTime, email, imageUrl from Item i join User u on ownerId = u.id' +
+      ' where title like ?', ['%' + title + '%'],
+      handler);
+   }
+   else {
+      req.cnn.query('select i.id, title, price, ownerId, zip, latitude, longitude,' +
+      ' postTime, email, imageUrl from Item i join User u on ownerId = u.id',
+      handler);
+   }
 });
 
 router.get('/:itemId', function (req, res) {

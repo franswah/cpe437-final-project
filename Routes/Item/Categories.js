@@ -26,11 +26,8 @@ router.get('/:id/Items', function (req, res) {
    var dist = req.query.radius;
    var title = req.query.title;
 
-   req.cnn.chkQry('select i.id, title, price, ownerId, zip, latitude, longitude,' +
-    ' postTime, email, imageUrl from Item i join User u on ownerId = u.id' +
-    ' where categoryId = ?', [req.params.id],
-      function (err, itemArr) {
-         utils.appendDistance(itemArr, req.session);
+   var handler = function(err, itemArr) {
+      utils.appendDistance(itemArr, req.session);
 
          if (dist) {
             itemArr = utils.cutoffDistance(itemArr, dist);
@@ -38,7 +35,20 @@ router.get('/:id/Items', function (req, res) {
 
          res.json(itemArr);
          req.cnn.release();
-      });
+   };
+
+   if (title) {
+      req.cnn.query('select i.id, title, price, ownerId, zip, latitude, longitude,' +
+      ' postTime, email, imageUrl from Item i join User u on ownerId = u.id' +
+      ' where categoryId = ? and title like ?', [req.params.id, '%' + title + '%'],
+      handler);
+   }
+   else {
+      req.cnn.query('select i.id, title, price, ownerId, zip, latitude, longitude,' +
+      ' postTime, email, imageUrl from Item i join User u on ownerId = u.id' +
+      ' where categoryId = ?', [req.params.id],
+      handler);
+   }
 });
 
 router.post('/:id/Items', function (req, res) {
