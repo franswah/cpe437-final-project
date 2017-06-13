@@ -74,8 +74,9 @@ app.delete('/DB', function (req, res) {
    // Callback to reinsert admin user
    cbs.push(function (cb) {
       req.cnn.query('INSERT INTO User (firstName, lastName, email,' +
-       ' password, whenRegistered, role, zip) VALUES ' +
-       '("Joe", "Admin", "adm@11.com","password", NOW(), 1, "93401");', cb);
+       ' password, whenRegistered, role, zip, latitude, longitude) VALUES' +
+       ' ("Joe", "Admin", "adm@11.com","password", NOW(), 1, "93401", ' +
+       ' 35.2454989, -120.5969758);', cb);
    });
 
    // Callback to clear sessions, release connection and return result

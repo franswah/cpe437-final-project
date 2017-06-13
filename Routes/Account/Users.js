@@ -60,6 +60,13 @@ router.post('/', function(req, res) {
    },
    function(existingPrss, fields, cb) {  // If no duplicates, insert new User
       if (vld.check(!existingPrss.length, Tags.dupEmail, null, cb)) {
+         utils.findZipLatLng(body, cb);
+      }
+   },
+   function(places, res, cb) {
+      if (vld.check(places.length && places[0].location, Tags.badValue, ["zip"], cb)) {
+         body.latitude = places[0].location.lat;
+         body.longitude = places[0].location.lng;
          body.termsAccepted = body.termsAccepted && new Date();
          cnn.chkQry('insert into User set ?', body, cb);
       }
@@ -68,7 +75,8 @@ router.post('/', function(req, res) {
       res.location(router.baseURL + '/' + result.insertId).end();
       cb();
    }],
-   function() {
+   function(err) {
+      if (err) console.log(err);
       cnn.release();
    });
 });
@@ -116,9 +124,22 @@ router.put('/:id', function(req, res) {
        body.oldPassword === result[0].password || admin, 
        Tags.oldPwdMismatch, null, cb)) {
          delete body.oldPassword;
-         cnn.chkQry('update User set ? where id = ?',
-          [body, req.params.id], cb);
+         if (body.zip) {
+            utils.findZipLatLng(body, cb);
+         }
+         else {
+            cb(null, null, null);
+         }
       }
+   },
+   function(places, res, cb) {
+      if (body.zip && vld.check(places.length && places[0].location, Tags.badValue, ["zip"], cb)) {
+         body.latitude = places[0].location.lat;
+         body.longitude = places[0].location.lng;
+      }
+
+      cnn.chkQry('update User set ? where id = ?',
+          [body, req.params.id], cb);
    },
    function(result, fields, cb) {
       res.status(200).end();

@@ -1,4 +1,9 @@
 var geolib = require('geolib');
+var geocoder = require('google-geocoder');
+
+var geo = geocoder({
+   key: 'AIzaSyDaPSxeHsiKl8wz-pgnyJLmKbwyhgV1gkw'
+});
 
 var utils = {
 
@@ -28,6 +33,10 @@ var utils = {
          delete item.longitude;
          delete item.latitude;
       });
+   },
+
+   findZipLatLng: function(zipObject, cb) {
+      geo.find(zipObject.zip, cb);
    }
 };
 

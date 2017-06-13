@@ -37,8 +37,8 @@ create table Item (
     references Category(id)
 );
 
-insert into User (firstName, lastName, email, password, whenRegistered, role, zip)
-            VALUES ("Joe", "Admin", "adm@11.com", "password", NOW(), 1, "93401");
+insert into User (firstName, lastName, email, password, whenRegistered, role, zip, latitude, longitude)
+            VALUES ("Joe", "Admin", "adm@11.com", "password", NOW(), 1, "93401", 35.2454989, -120.5969758);
 
 insert into Category (id, name) VALUES 
    (0, "Other/None"),
