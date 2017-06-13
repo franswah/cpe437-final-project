@@ -25,8 +25,7 @@
 				"9b2c2a13-e5f1-606b-5a0c-42b41485f0f0",
 				"959d8cbd-a301-289d-1f29-06fcc180ef3c",
 				"5db95e83-ba37-5289-0f7e-378efb6b8e66"
-			],
-			"folders_order": []
+			]
 		},
 		{
 			"owner": "1126040",
@@ -51,7 +50,6 @@
 				"d5abf68d-bd2e-79ef-5960-e19e298548d4",
 				"1e7b55ce-fb83-53be-7605-ba95646b267b"
 			],
-			"folders_order": [],
 			"collectionId": "54d87991-4933-06fd-3bdd-7aecd04f96e6"
 		},
 		{
@@ -63,6 +61,7 @@
 			"name": "1c User Modification",
 			"description": "",
 			"order": [
+				"2cd72b04-28a2-ec28-2ce8-7e03e296e8d1",
 				"ca7615f3-4fee-41a5-26b4-9ec08ad0c55d",
 				"777a26df-a7d2-32c7-95a0-92d00f3fd02f",
 				"2cb29d52-851a-6b48-c6ed-3802eea152c9",
@@ -94,7 +93,6 @@
 				"b59eff8e-bcd7-6e86-fde8-fb1aca5fa14c",
 				"1100c05b-5f9b-3be2-3026-7a4a8c40a9e0"
 			],
-			"folders_order": [],
 			"collectionId": "54d87991-4933-06fd-3bdd-7aecd04f96e6"
 		},
 		{
@@ -125,7 +123,6 @@
 				"7330807f-8599-0531-da26-53e8e10b6011",
 				"28a00642-5d0a-9153-78b9-9c4ec0c2aa3a"
 			],
-			"folders_order": [],
 			"collectionId": "54d87991-4933-06fd-3bdd-7aecd04f96e6"
 		},
 		{
@@ -347,38 +344,58 @@
 		{
 			"id": "1a9a7e17-3ebb-db51-0f74-0076fdabad44",
 			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
 			"url": "{{url}}/Users",
+			"queryParams": [],
 			"preRequestScript": null,
 			"pathVariables": {},
+			"pathVariableData": [],
 			"method": "POST",
 			"data": [],
 			"dataMode": "raw",
 			"tests": "tests[\"Status code is 403\"] = responseCode.code === 403;\n\ntests[\"Body matches string\"] = responseBody === \"\";",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1496997094236,
+			"time": 1497163569614,
 			"name": "Register Admin as Non Admin",
 			"description": "",
 			"collectionId": "54d87991-4933-06fd-3bdd-7aecd04f96e6",
-			"rawModeData": "{\n  \"email\": \"student@adminRole\",\n    \"firstName\": \"FirstA\",\n    \"lastName\": \"LastA\",\n    \"role\"     : 1,\n    \"password\" : \"passwordA\",\n    \"termsAccepted\": true\n}"
+			"rawModeData": "{\n  \"email\": \"student@adminRole.com\",\n    \"firstName\": \"FirstA\",\n    \"lastName\": \"LastA\",\n    \"role\"     : 1,\n    \"password\" : \"passwordA\",\n    \"termsAccepted\": true,\n    \"zip\" : \"93401\"\n}"
 		},
 		{
 			"id": "1e7b55ce-fb83-53be-7605-ba95646b267b",
 			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
 			"url": "{{url}}/Users",
+			"queryParams": [],
 			"preRequestScript": null,
 			"pathVariables": {},
+			"pathVariableData": [],
 			"method": "POST",
 			"data": [],
 			"dataMode": "raw",
 			"tests": "tests[\"Status code is 400\"] = responseCode.code === 400;\n\ntests[\"Body matches string\"] = responseBody.has(\"badValue\");\n",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1496997109237,
+			"time": 1497163503062,
 			"name": "Register Invalid Zip",
 			"description": "",
 			"collectionId": "54d87991-4933-06fd-3bdd-7aecd04f96e6",
-			"rawModeData": "{\n  \"email\": \"studentB@noterms\",\n    \"firstName\": \"FirstA\",\n    \"lastName\": \"LastA\",\n    \"role\"     : 0,\n    \"password\" : \"passwordA\",\n    \"termsAccepted\": true,\n    \"zip\": \"00000\"\n}"
+			"rawModeData": "{\n  \"email\": \"studentB@noterms.com\",\n    \"firstName\": \"FirstA\",\n    \"lastName\": \"LastA\",\n    \"role\"     : 0,\n    \"password\" : \"passwordA\",\n    \"termsAccepted\": true,\n    \"zip\": \"1234\"\n}"
 		},
 		{
 			"id": "1eae8c43-169b-3ebf-16c6-489ac69e5ce7",
@@ -441,20 +458,30 @@
 		{
 			"id": "268c5ad0-3928-844a-14c6-6f19eca8169b",
 			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
 			"url": "{{url}}/Users",
+			"queryParams": [],
 			"preRequestScript": "",
 			"pathVariables": {},
+			"pathVariableData": [],
 			"method": "POST",
 			"data": [],
 			"dataMode": "raw",
 			"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1496992401174,
+			"time": 1497163469284,
 			"name": "Admin Register Student without Accepted Terms copy",
 			"description": "\n",
 			"collectionId": "54d87991-4933-06fd-3bdd-7aecd04f96e6",
-			"rawModeData": "{    \"email\": \"UserAF@domainA\",\n    \"firstName\": \"FirstA\",\n    \"lastName\" : \"Lakes\",\n    \"password\" : \"passwordA\",\n    \"role\"     : 1,\n    \"termsAccepted\": true,\n    \"zip\" : \"93401\"\n}"
+			"rawModeData": "{    \"email\": \"UserAF@domainA.com\",\n    \"firstName\": \"FirstA\",\n    \"lastName\" : \"Lakes\",\n    \"password\" : \"passwordA\",\n    \"role\"     : 1,\n    \"termsAccepted\": true,\n    \"zip\" : \"93401\"\n}"
 		},
 		{
 			"id": "276d4c5d-214c-60b7-ca86-5002bfba1860",
@@ -529,63 +556,109 @@
 		},
 		{
 			"id": "2cb29d52-851a-6b48-c6ed-3802eea152c9",
-			"folder": "efde9b7b-d724-ca1f-fa74-1c50b6eb470b",
-			"name": "Login Student A",
-			"dataMode": "raw",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{url}}/Ssns",
+			"queryParams": [],
+			"preRequestScript": "",
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
 			"data": [],
+			"dataMode": "raw",
+			"tests": "tests[\"Code 200\"] = responseCode.code === 200;\n\ntests[\"Cookie Returned\"] = postman.getResponseCookie(\"CHSAuth\")\n !== null && postman.getResponseCookie(\"CHSAuth\").value !== undefined;\nif (tests[\"Cookie Returned\"])\n   postman.setEnvironmentVariable(\"curLogin\",\n    postman.getResponseCookie(\"CHSAuth\").value)",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1497163684658,
+			"name": "Login Student A",
+			"description": "",
+			"collectionId": "54d87991-4933-06fd-3bdd-7aecd04f96e6",
+			"rawModeData": "{\n    \"email\": \"UserA@domainA.com\",\n    \"password\" : \"passwordA\"\n}"
+		},
+		{
+			"id": "2cd72b04-28a2-ec28-2ce8-7e03e296e8d1",
+			"folder": "efde9b7b-d724-ca1f-fa74-1c50b6eb470b",
+			"name": "Logout",
+			"dataMode": "params",
+			"data": [],
+			"rawModeData": "",
 			"descriptionFormat": null,
 			"description": "",
-			"headers": "Content-Type: application/json",
-			"method": "POST",
+			"headers": "",
+			"method": "DELETE",
 			"pathVariables": {},
-			"url": "{{url}}/Ssns",
+			"url": "{{url}}/Ssns/{{curLogin}}",
 			"preRequestScript": "",
-			"tests": "tests[\"Code 200\"] = responseCode.code === 200;\n\ntests[\"Cookie Returned\"] = postman.getResponseCookie(\"CHSAuth\")\n !== null && postman.getResponseCookie(\"CHSAuth\").value !== undefined;\nif (tests[\"Cookie Returned\"])\n   postman.setEnvironmentVariable(\"curLogin\",\n    postman.getResponseCookie(\"CHSAuth\").value)",
+			"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;",
 			"currentHelper": null,
-			"helperAttributes": "null",
+			"helperAttributes": null,
 			"queryParams": null,
 			"headerData": null,
 			"pathVariableData": null,
-			"collectionId": "54d87991-4933-06fd-3bdd-7aecd04f96e6",
-			"rawModeData": "{\n    \"email\": \"UserA@domainA\",\n    \"password\" : \"passwordA\"\n}",
-			"isFromCollection": true,
-			"collectionRequestId": "6c0c8093-e7e2-50a5-db7b-aa0df1f15bc1"
+			"collectionId": "54d87991-4933-06fd-3bdd-7aecd04f96e6"
 		},
 		{
 			"id": "2d391e8e-66fe-f572-35a8-428fe9b49c41",
 			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
 			"url": "{{url}}/Users",
+			"queryParams": [],
 			"preRequestScript": "",
 			"pathVariables": {},
+			"pathVariableData": [],
 			"method": "POST",
 			"data": [],
 			"dataMode": "raw",
 			"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1496997216019,
+			"time": 1497163900982,
 			"name": "Register Student SLO",
 			"description": "\n",
 			"collectionId": "54d87991-4933-06fd-3bdd-7aecd04f96e6",
-			"rawModeData": "{\n    \"email\": \"UserB@domainC\",\n    \"firstName\": \"FirstC\",\n    \"lastName\" : \"LastC\",\n    \"password\" : \"passwordC\",\n    \"role\"     : 0,\n    \"termsAccepted\": true,\n    \"zip\": \"93405\"\n}"
+			"rawModeData": "{\n    \"email\": \"UserB@domainC.com\",\n    \"firstName\": \"FirstC\",\n    \"lastName\" : \"LastC\",\n    \"password\" : \"passwordC\",\n    \"role\"     : 0,\n    \"termsAccepted\": true,\n    \"zip\": \"93405\"\n}"
 		},
 		{
 			"id": "2ddbf667-5819-1d62-6fcd-e132b60dbb11",
 			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
 			"url": "{{url}}/Ssns",
+			"queryParams": [],
 			"preRequestScript": "",
 			"pathVariables": {},
+			"pathVariableData": [],
 			"method": "POST",
 			"data": [],
 			"dataMode": "raw",
 			"tests": "tests[\"Code 200\"] = responseCode.code === 200;\n\ntests[\"Cookie Returned\"] = postman.getResponseCookie(\"CHSAuth\")\n !== null && postman.getResponseCookie(\"CHSAuth\").value !== undefined;\nif (tests[\"Cookie Returned\"])\n   postman.setEnvironmentVariable(\"curLogin\",\n    postman.getResponseCookie(\"CHSAuth\").value)",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1496996310180,
+			"time": 1497163912272,
 			"name": "Login Student OH",
 			"description": "",
 			"collectionId": "54d87991-4933-06fd-3bdd-7aecd04f96e6",
-			"rawModeData": "{\n    \"email\": \"UserB@domainD\",\n    \"password\" : \"passwordD\"\n}"
+			"rawModeData": "{\n    \"email\": \"UserB@domainD.com\",\n    \"password\" : \"passwordD\"\n}"
 		},
 		{
 			"id": "313087ac-7151-9adb-a748-e7f7105d5597",
@@ -670,28 +743,32 @@
 			"rawModeData": "{\"email\": \"adm@11.com\", \"password\": \"password\"}"
 		},
 		{
-			"folder": "bb8cfc7c-6ccf-e975-6af7-e1e7adfec20f",
 			"id": "39e037ac-1add-ac3e-ca9a-5326c73fcf43",
-			"name": "Login Student A",
-			"dataMode": "raw",
-			"data": [],
-			"descriptionFormat": null,
-			"description": "",
-			"headers": "Content-Type: application/json",
-			"method": "POST",
-			"pathVariables": {},
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
 			"url": "{{url}}/Ssns",
+			"queryParams": [],
 			"preRequestScript": "",
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
 			"tests": "tests[\"Code 200\"] = responseCode.code === 200;\n\ntests[\"Cookie Returned\"] = postman.getResponseCookie(\"CHSAuth\")\n !== null && postman.getResponseCookie(\"CHSAuth\").value !== undefined;\nif (tests[\"Cookie Returned\"])\n   postman.setEnvironmentVariable(\"curLogin\",\n    postman.getResponseCookie(\"CHSAuth\").value)",
-			"currentHelper": null,
-			"helperAttributes": null,
-			"queryParams": null,
-			"headerData": null,
-			"pathVariableData": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1497163925015,
+			"name": "Login Student A",
+			"description": "",
 			"collectionId": "54d87991-4933-06fd-3bdd-7aecd04f96e6",
-			"isFromCollection": true,
-			"collectionRequestId": "39e037ac-1add-ac3e-ca9a-5326c73fcf43",
-			"rawModeData": "{\n    \"email\": \"UserA@domainA\",\n    \"password\" : \"passwordA\"\n}"
+			"rawModeData": "{\n    \"email\": \"UserA@domainA.com\",\n    \"password\" : \"passwordA\"\n}"
 		},
 		{
 			"id": "3a3b6fbb-0b4c-94fd-ca82-eaaf533b33e6",
@@ -718,20 +795,30 @@
 		{
 			"id": "3b0ad9de-c9fb-d80a-3a16-31c353254060",
 			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
 			"url": "{{url}}/Categories/2/Items",
+			"queryParams": [],
 			"preRequestScript": null,
 			"pathVariables": {},
+			"pathVariableData": [],
 			"method": "POST",
 			"data": [],
 			"dataMode": "raw",
 			"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1496994243853,
+			"time": 1497163978029,
 			"name": "Create new Item Category 2",
 			"description": "",
 			"collectionId": "54d87991-4933-06fd-3bdd-7aecd04f96e6",
-			"rawModeData": "{   \"title\" : \"Stove\",\n  \"description\" : \"Good condition\",\n  \"price\" : 1000\n}"
+			"rawModeData": "{\n  \"title\" : \"Stove\",\n  \"description\" : \"Good condition\",\n  \"price\" : 1000\n}"
 		},
 		{
 			"id": "43060ef3-fe5b-e2b0-291d-3fddfdea75d8",
@@ -789,52 +876,75 @@
 		{
 			"id": "519b2158-6e27-5a47-4fa5-f73c9a3214c4",
 			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
 			"url": "{{url}}/Users",
+			"queryParams": [],
 			"preRequestScript": "",
 			"pathVariables": {},
+			"pathVariableData": [],
 			"method": "POST",
 			"data": [],
 			"dataMode": "raw",
 			"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1496992406446,
+			"time": 1497163470036,
 			"name": "Admin Register Student no password",
 			"description": "\n",
 			"collectionId": "54d87991-4933-06fd-3bdd-7aecd04f96e6",
-			"rawModeData": "{    \"email\": \"UserAFC@domainA\",\n    \"firstName\": \"FirstA\",\n    \"lastName\" : \"Lakefes\",\n    \"role\"     : 0,\n    \"termsAccepted\": true,\n    \"zip\" : \"93401\"\n}"
+			"rawModeData": "{    \"email\": \"UserAFC@domainA.com\",\n    \"firstName\": \"FirstA\",\n    \"lastName\" : \"Lakefes\",\n    \"role\"     : 0,\n    \"termsAccepted\": true,\n    \"zip\" : \"93401\"\n}"
 		},
 		{
 			"id": "550e7b47-abd7-53fd-86dd-e743c5d5205b",
 			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
 			"url": "{{url}}/Users",
+			"queryParams": [],
 			"preRequestScript": "",
 			"pathVariables": {},
+			"pathVariableData": [],
 			"method": "POST",
 			"data": [],
 			"dataMode": "raw",
 			"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1496997199235,
+			"time": 1497163879341,
 			"name": "Register Student A copy",
 			"description": "\n",
 			"collectionId": "54d87991-4933-06fd-3bdd-7aecd04f96e6",
-			"rawModeData": "{\n    \"email\": \"UserA@domainA\",\n    \"firstName\": \"FirstA\",\n    \"lastName\" : \"LastA\",\n    \"password\" : \"passwordA\",\n    \"role\"     : 0,\n    \"termsAccepted\": true,\n    \"zip\": \"93401\"\n}"
+			"rawModeData": "{\n    \"email\": \"UserA@domainA.com\",\n    \"firstName\": \"FirstA\",\n    \"lastName\" : \"LastA\",\n    \"password\" : \"passwordA\",\n    \"role\"     : 0,\n    \"termsAccepted\": true,\n    \"zip\": \"93401\"\n}"
 		},
 		{
 			"id": "56225213-bca6-d520-daae-a958455f5c8c",
 			"headers": "",
+			"headerData": [],
 			"url": "{{url}}/Items/2",
+			"queryParams": [],
 			"preRequestScript": null,
 			"pathVariables": {},
+			"pathVariableData": [],
 			"method": "GET",
 			"data": null,
 			"dataMode": "params",
-			"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;\n\ntest[\"Has all fields\"] = responseBody.has(\"id\") && responseBody.has(\"categoryId\") && responseBody.has(\"title\") && responseBody.has(\"description\") && responseBody.has(\"price\") && responseBody.has(\"ownerId\") && responseBody.has(\"email\") && responseBody.has(\"zip\") && responseBody.has(\"distance\") && responseBody.has(\"postTime\") && responseBody.has(\"imageUrl\")\n\nif(tests[\"Status code is 200\"]) {\n    var jsonData = JSON.parse(responseBody);\n    tests[\"Correct email\"] = jsonData.email === \"UserA@domainA\";  \n    tests[\"Correct title\"] = jsonData.title === \"Asus Laptop\";  \n    tests[\"Correct description\"] = jsonData.description === \"Great condition\";  \n    tests[\"Correct ownerId\"] = jsonData.ownerId === 2;\n    tests[\"Correct zip\"] = jsonData.zip === \"93401\";\n    test[\"Correctish distance\"] = jsonData.distance < 1;\n    test[\"Nonexistant imageUrl\"] = !jsonData.imageUrl;\n    test[\"Correct category\"] = jsonData.categoryId === 2;\n    \n}",
+			"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;\n\ntests[\"Has all fields\"] = responseBody.has(\"id\") && responseBody.has(\"categoryId\") && responseBody.has(\"title\") && responseBody.has(\"description\") && responseBody.has(\"price\") && responseBody.has(\"ownerId\") && responseBody.has(\"email\") && responseBody.has(\"zip\") && responseBody.has(\"distance\") && responseBody.has(\"postTime\") && responseBody.has(\"imageUrl\")\n\nif(tests[\"Status code is 200\"]) {\n    var jsonData = JSON.parse(responseBody);\n    tests[\"Correct email\"] = jsonData.email === \"UserA@domainA.com\";  \n    tests[\"Correct title\"] = jsonData.title === \"Asus Laptop\";  \n    tests[\"Correct description\"] = jsonData.description === \"Great condition\";  \n    tests[\"Correct ownerId\"] = jsonData.ownerId === 2;\n    tests[\"Correct zip\"] = jsonData.zip === \"93401\";\n    tests[\"Correctish distance\"] = jsonData.distance < 1;\n    tests[\"Nonexistant imageUrl\"] = !jsonData.imageUrl;\n    tests[\"Correct category\"] = jsonData.categoryId === 2;\n    \n}",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1496995674391,
+			"time": 1497167386661,
 			"name": "Get Item from ID",
 			"description": "",
 			"collectionId": "54d87991-4933-06fd-3bdd-7aecd04f96e6"
@@ -860,21 +970,30 @@
 		{
 			"id": "59d8868c-529f-2b84-a81a-b8673fdeb858",
 			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
 			"url": "{{url}}/Ssns",
+			"queryParams": [],
 			"preRequestScript": "",
 			"pathVariables": {},
+			"pathVariableData": [],
 			"method": "POST",
 			"data": [],
 			"dataMode": "raw",
 			"tests": "tests[\"Code 200\"] = responseCode.code === 200;\n\ntests[\"Cookie Returned\"] = postman.getResponseCookie(\"CHSAuth\")\n !== null && postman.getResponseCookie(\"CHSAuth\").value !== undefined;\nif (tests[\"Cookie Returned\"])\n   postman.setEnvironmentVariable(\"curLogin\",\n    postman.getResponseCookie(\"CHSAuth\").value)",
 			"currentHelper": "normal",
-			"helperAttributes": "{}",
-			"time": 1493216853394,
+			"helperAttributes": {},
+			"time": 1497163859150,
 			"name": "Login Student A newerPass",
 			"description": "",
 			"collectionId": "54d87991-4933-06fd-3bdd-7aecd04f96e6",
-			"rawModeData": "{\n    \"email\": \"UserA@domainA\",\n    \"password\" : \"newerPassA\"\n}",
-			"folder": "efde9b7b-d724-ca1f-fa74-1c50b6eb470b"
+			"rawModeData": "{\n    \"email\": \"UserA@domainA.com\",\n    \"password\" : \"newerPassA\"\n}"
 		},
 		{
 			"id": "5a7715c6-350f-3332-62f9-93c1bcc287e8",
@@ -991,16 +1110,26 @@
 		{
 			"id": "777a26df-a7d2-32c7-95a0-92d00f3fd02f",
 			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
 			"url": "{{url}}/Users/1",
+			"queryParams": [],
 			"preRequestScript": "",
 			"pathVariables": {},
+			"pathVariableData": [],
 			"method": "GET",
 			"data": [],
 			"dataMode": "raw",
 			"tests": "tests[\"Status code is 401\"] = responseCode.code === 401;\n\ntests[\"Body matches string\"] = responseBody === \"\";",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1496997125171,
+			"time": 1497163742727,
 			"name": "Get Info Without Login",
 			"description": "no login get info\n",
 			"collectionId": "54d87991-4933-06fd-3bdd-7aecd04f96e6",
@@ -1069,16 +1198,19 @@
 		{
 			"id": "87d24660-a193-f3d9-4ace-8e2f48886e8d",
 			"headers": "",
+			"headerData": [],
 			"url": "{{url}}/Categories/2/Items",
+			"queryParams": [],
 			"preRequestScript": null,
 			"pathVariables": {},
+			"pathVariableData": [],
 			"method": "GET",
 			"data": null,
 			"dataMode": "params",
-			"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;\n\ntest[\"Has all fields\"] = responseBody.has(\"id\") && responseBody.has(\"categoryId\") && responseBody.has(\"title\") && responseBody.has(\"description\") && responseBody.has(\"price\") && responseBody.has(\"ownerId\") && responseBody.has(\"email\") && responseBody.has(\"zip\") && responseBody.has(\"distance\") && responseBody.has(\"postTime\") && responseBody.has(\"imageUrl\")\n\nif(tests[\"Status code is 200\"]) {\n    var jsonData = JSON.parse(responseBody);\n    tests[\"Proper num returned\"] = jsonData.length === 2;  \n}\n",
+			"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;\n\ntests[\"Has all fields\"] = responseBody.has(\"id\") && responseBody.has(\"title\") && responseBody.has(\"price\") && responseBody.has(\"ownerId\") && responseBody.has(\"email\") && responseBody.has(\"zip\") && responseBody.has(\"distance\") && responseBody.has(\"postTime\") && responseBody.has(\"imageUrl\");\n\nif(tests[\"Status code is 200\"]) {\n    var jsonData = JSON.parse(responseBody);\n    tests[\"Proper num returned\"] = jsonData.length === 2;  \n}\n",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1496992250510,
+			"time": 1497166471932,
 			"name": "Get Category",
 			"description": "",
 			"collectionId": "54d87991-4933-06fd-3bdd-7aecd04f96e6"
@@ -1103,20 +1235,30 @@
 		{
 			"id": "8cccce9b-8f18-8de5-0ccd-49b3bf76c2cd",
 			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
 			"url": "{{url}}/Users",
+			"queryParams": [],
 			"preRequestScript": null,
 			"pathVariables": {},
+			"pathVariableData": [],
 			"method": "POST",
 			"data": [],
 			"dataMode": "raw",
 			"tests": "tests[\"Status code is 400\"] = responseCode.code === 400;\n\ntests[\"Body has missingField\"] = responseBody.has(\"missingField\");\n\ntests[\"Body has email\"] = responseBody.has(\"email\");",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1496997067924,
+			"time": 1497163527885,
 			"name": "Register Missing Email",
 			"description": "",
 			"collectionId": "54d87991-4933-06fd-3bdd-7aecd04f96e6",
-			"rawModeData": "{\n    \"firstName\": \"FirstA\",\n    \"lastName\" : \"LastA\",\n    \"password\" : \"passwordA\",\n    \"role\"     : 0,\n    \"termsAccepted\": true\n}"
+			"rawModeData": "{\n    \"firstName\": \"FirstA\",\n    \"lastName\" : \"LastA\",\n    \"password\" : \"passwordA\",\n    \"role\"     : 0,\n    \"termsAccepted\": true,\n    \"zip\" : \"93401\"\n}"
 		},
 		{
 			"id": "8e19db9d-539b-1a48-8cbc-1c5ba957afb8",
@@ -1138,20 +1280,30 @@
 		{
 			"id": "8f4158ae-e098-14e0-30f8-28ac1ab9816c",
 			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
 			"url": "{{url}}/Users",
+			"queryParams": [],
 			"preRequestScript": "",
 			"pathVariables": {},
+			"pathVariableData": [],
 			"method": "POST",
 			"data": [],
 			"dataMode": "raw",
 			"tests": "tests[\"Status code is 400\"] = responseCode.code === 400;\ntests[\"Body has string\"] = responseBody.has(\"dupEmail\");",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1496992411990,
+			"time": 1497163462388,
 			"name": "Admin Dup email",
 			"description": "\n",
 			"collectionId": "54d87991-4933-06fd-3bdd-7aecd04f96e6",
-			"rawModeData": "{    \"email\": \"UserAFC@domainA\",\n    \"firstName\": \"FirstA\",\n    \"lastName\" : \"Lakefes\",\n    \"role\"     : 0,\n    \"termsAccepted\": true,\n    \"zip\" : \"93401\"\n}"
+			"rawModeData": "{    \"email\": \"UserAFC@domainA.com\",\n    \"firstName\": \"FirstA\",\n    \"lastName\" : \"Lakefes\",\n    \"role\"     : 0,\n    \"termsAccepted\": true,\n    \"zip\" : \"93401\"\n}"
 		},
 		{
 			"id": "8f83c55d-0d95-55f1-785d-0f853a2e65bc",
@@ -1199,38 +1351,58 @@
 		{
 			"id": "94af9a75-b866-0451-ea51-7c3f7831315e",
 			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
 			"url": "{{url}}/Users",
+			"queryParams": [],
 			"preRequestScript": "",
 			"pathVariables": {},
+			"pathVariableData": [],
 			"method": "POST",
 			"data": [],
 			"dataMode": "raw",
 			"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1496992390551,
+			"time": 1497163461166,
 			"name": "Admin Register Student without Accepted Terms",
 			"description": "\n",
 			"collectionId": "54d87991-4933-06fd-3bdd-7aecd04f96e6",
-			"rawModeData": "{\n    \"email\": \"UserC@domainA\",\n    \"firstName\": \"FirstA\",\n    \"lastName\" : \"Ham\",\n    \"password\" : \"passwordA\",\n    \"role\"     : 0,\n    \"termsAccepted\": false,\n    \"zip\" : \"93401\"\n}"
+			"rawModeData": "{\n    \"email\": \"UserC@domainA.com\",\n    \"firstName\": \"FirstA\",\n    \"lastName\" : \"Ham\",\n    \"password\" : \"passwordA\",\n    \"role\"     : 0,\n    \"termsAccepted\": false,\n    \"zip\" : \"93401\"\n}"
 		},
 		{
 			"id": "9580571a-b620-8453-613c-acd2a216527d",
 			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
 			"url": "{{url}}/Users",
+			"queryParams": [],
 			"preRequestScript": "",
 			"pathVariables": {},
+			"pathVariableData": [],
 			"method": "POST",
 			"data": [],
 			"dataMode": "raw",
 			"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1496997089405,
+			"time": 1497163563236,
 			"name": "Register Student A OK",
 			"description": "\n",
 			"collectionId": "54d87991-4933-06fd-3bdd-7aecd04f96e6",
-			"rawModeData": "{\n    \"email\": \"UserA@domainA\",\n    \"firstName\": \"FirstA\",\n    \"lastName\" : \"LastA\",\n    \"password\" : \"passwordA\",\n    \"role\"     : 0,\n    \"termsAccepted\": true\n}"
+			"rawModeData": "{\n    \"email\": \"UserA@domainA.com\",\n    \"firstName\": \"FirstA\",\n    \"lastName\" : \"LastA\",\n    \"password\" : \"passwordA\",\n    \"role\"     : 0,\n    \"termsAccepted\": true,\n    \"zip\" : \"93401\"\n}"
 		},
 		{
 			"folder": "8690842b-b24b-3fbc-280f-8fe403c09f86",
@@ -1292,20 +1464,30 @@
 		{
 			"id": "9a49f6b1-3065-3bc9-077d-61ed0ebcb70e",
 			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
 			"url": "{{url}}/Users",
+			"queryParams": [],
 			"preRequestScript": null,
 			"pathVariables": {},
+			"pathVariableData": [],
 			"method": "POST",
 			"data": [],
 			"dataMode": "raw",
 			"tests": "tests[\"Status code is 403\"] = responseCode.code === 403;\n",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1496997087539,
+			"time": 1497163559503,
 			"name": "Register Nonexistant Role",
 			"description": "",
 			"collectionId": "54d87991-4933-06fd-3bdd-7aecd04f96e6",
-			"rawModeData": "{\n  \"email\": \"student@nonexistantRole\",\n    \"firstName\": \"FirstA\",\n    \"lastName\": \"LastA\",\n    \"role\"     : 2,\n    \"password\" : \"passwordA\",\n    \"termsAccepted\": true\n}"
+			"rawModeData": "{\n  \"email\": \"student@nonexistantRole.com\",\n    \"firstName\": \"FirstA\",\n    \"lastName\": \"LastA\",\n    \"role\"     : 2,\n    \"password\" : \"passwordA\",\n    \"termsAccepted\": true,\n    \"zip\" : \"93401\"\n}"
 		},
 		{
 			"folder": "8690842b-b24b-3fbc-280f-8fe403c09f86",
@@ -1367,44 +1549,58 @@
 		{
 			"id": "a1d76d20-6da4-d055-93d2-e33a11bd692f",
 			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
 			"url": "{{url}}/Users",
+			"queryParams": [],
 			"preRequestScript": null,
 			"pathVariables": {},
+			"pathVariableData": [],
 			"method": "POST",
 			"data": [],
 			"dataMode": "raw",
 			"tests": "tests[\"Status code is 400\"] = responseCode.code === 400;\n",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1496997102474,
+			"time": 1497163623007,
 			"name": "Register Nonexistant Role as Admin",
 			"description": "",
 			"collectionId": "54d87991-4933-06fd-3bdd-7aecd04f96e6",
-			"rawModeData": "{\n  \"email\": \"student@nonexistantRoleC\",\n    \"firstName\": \"FirstA\",\n    \"lastName\": \"LastA\",\n    \"role\"     : 3,\n    \"password\" : \"passwordA\",\n    \"termsAccepted\": true\n}"
+			"rawModeData": "{\n  \"email\": \"student@nonexistantRoleC.com\",\n    \"firstName\": \"FirstA\",\n    \"lastName\": \"LastA\",\n    \"role\"     : 3,\n    \"password\" : \"passwordA\",\n    \"termsAccepted\": true,\n    \"zip\" : \"93401\"\n}"
 		},
 		{
-			"folder": "54ce9f50-8818-c269-3049-f1d2f733c50c",
 			"id": "a99328cf-923f-50e7-d0ca-0251c0cc103f",
-			"name": "Login Student A",
-			"dataMode": "raw",
-			"data": [],
-			"descriptionFormat": null,
-			"description": "",
-			"headers": "Content-Type: application/json",
-			"method": "POST",
-			"pathVariables": {},
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
 			"url": "{{url}}/Ssns",
+			"queryParams": [],
 			"preRequestScript": "",
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
 			"tests": "tests[\"Code 200\"] = responseCode.code === 200;\n\ntests[\"Cookie Returned\"] = postman.getResponseCookie(\"CHSAuth\")\n !== null && postman.getResponseCookie(\"CHSAuth\").value !== undefined;\nif (tests[\"Cookie Returned\"])\n   postman.setEnvironmentVariable(\"curLogin\",\n    postman.getResponseCookie(\"CHSAuth\").value)",
-			"currentHelper": null,
-			"helperAttributes": null,
-			"queryParams": null,
-			"headerData": null,
-			"pathVariableData": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1497163921964,
+			"name": "Login Student A",
+			"description": "",
 			"collectionId": "54d87991-4933-06fd-3bdd-7aecd04f96e6",
-			"isFromCollection": true,
-			"collectionRequestId": "a99328cf-923f-50e7-d0ca-0251c0cc103f",
-			"rawModeData": "{\n    \"email\": \"UserA@domainA\",\n    \"password\" : \"passwordA\"\n}"
+			"rawModeData": "{\n    \"email\": \"UserA@domainA.com\",\n    \"password\" : \"passwordA\"\n}"
 		},
 		{
 			"id": "aad45453-b26a-93c3-3f12-51d64fd2e964",
@@ -1462,38 +1658,58 @@
 		{
 			"id": "ad2395d7-e89f-7304-56c9-81539c1dcc25",
 			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
 			"url": "{{url}}/Users",
+			"queryParams": [],
 			"preRequestScript": "",
 			"pathVariables": {},
+			"pathVariableData": [],
 			"method": "POST",
 			"data": [],
 			"dataMode": "raw",
 			"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1496997219907,
+			"time": 1497163909421,
 			"name": "Register Student OH",
 			"description": "\n",
 			"collectionId": "54d87991-4933-06fd-3bdd-7aecd04f96e6",
-			"rawModeData": "{\n    \"email\": \"UserB@domainD\",\n    \"firstName\": \"FirstD\",\n    \"lastName\" : \"LastD\",\n    \"password\" : \"passwordD\",\n    \"role\"     : 0,\n    \"termsAccepted\": true,\n    \"zip\": \"43571\"\n}"
+			"rawModeData": "{\n    \"email\": \"UserB@domainD.com\",\n    \"firstName\": \"FirstD\",\n    \"lastName\" : \"LastD\",\n    \"password\" : \"passwordD\",\n    \"role\"     : 0,\n    \"termsAccepted\": true,\n    \"zip\": \"43571\"\n}"
 		},
 		{
 			"id": "ae010b2a-2775-4b92-522e-0c79415ba687",
 			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
 			"url": "{{url}}/Users",
+			"queryParams": [],
 			"preRequestScript": null,
 			"pathVariables": {},
+			"pathVariableData": [],
 			"method": "POST",
 			"data": [],
 			"dataMode": "raw",
 			"tests": "tests[\"Status code is 400\"] = responseCode.code === 400;\n\ntests[\"Body matches string\"] = responseBody.has(\"missingField\");\n\ntests[\"Body matches string\"] = responseBody.has(\"lastName\");",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1496997072436,
+			"time": 1497163531965,
 			"name": "Register Missing LastName",
 			"description": "",
 			"collectionId": "54d87991-4933-06fd-3bdd-7aecd04f96e6",
-			"rawModeData": "{\n  \"email\": \"studentB@nolastname\",\n    \"firstName\": \"FirstA\",\n    \"password\" : \"passwordA\",\n    \"role\"     : 0,\n    \"termsAccepted\": true\n}"
+			"rawModeData": "{\n  \"email\": \"studentB@nolastname.com\",\n    \"firstName\": \"FirstA\",\n    \"password\" : \"passwordA\",\n    \"role\"     : 0,\n    \"termsAccepted\": true,\n    \"zip\" : \"93401\"\n}"
 		},
 		{
 			"id": "ae99b16f-1c14-34da-b82d-dd27037f0134",
@@ -1575,20 +1791,30 @@
 		{
 			"id": "b5a5de3b-428d-a624-a4ad-f6edd4969af1",
 			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
 			"url": "{{url}}/Users",
+			"queryParams": [],
 			"preRequestScript": "",
 			"pathVariables": {},
+			"pathVariableData": [],
 			"method": "POST",
 			"data": [],
 			"dataMode": "raw",
 			"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1496997210508,
+			"time": 1497163891739,
 			"name": "Register Student NY",
 			"description": "\n",
 			"collectionId": "54d87991-4933-06fd-3bdd-7aecd04f96e6",
-			"rawModeData": "{\n    \"email\": \"UserB@domainB\",\n    \"firstName\": \"FirstB\",\n    \"lastName\" : \"LastB\",\n    \"password\" : \"passwordB\",\n    \"role\"     : 0,\n    \"termsAccepted\": true,\n    \"zip\": \"10001\"\n}"
+			"rawModeData": "{\n    \"email\": \"UserB@domainB.com\",\n    \"firstName\": \"FirstB\",\n    \"lastName\" : \"LastB\",\n    \"password\" : \"passwordB\",\n    \"role\"     : 0,\n    \"termsAccepted\": true,\n    \"zip\": \"10001\"\n}"
 		},
 		{
 			"id": "b640c6bf-b6dd-19d5-d3f2-73d62b7af2e7",
@@ -1611,20 +1837,30 @@
 		{
 			"id": "b70efaae-e621-cc40-0dec-36cd494bf17c",
 			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
 			"url": "{{url}}/Ssns",
+			"queryParams": [],
 			"preRequestScript": "",
 			"pathVariables": {},
+			"pathVariableData": [],
 			"method": "POST",
 			"data": [],
 			"dataMode": "raw",
 			"tests": "tests[\"Code 200\"] = responseCode.code === 200;\n\ntests[\"Cookie Returned\"] = postman.getResponseCookie(\"CHSAuth\")\n !== null && postman.getResponseCookie(\"CHSAuth\").value !== undefined;\nif (tests[\"Cookie Returned\"])\n   postman.setEnvironmentVariable(\"curLogin\",\n    postman.getResponseCookie(\"CHSAuth\").value)",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1496993785749,
+			"time": 1497163904334,
 			"name": "Login Student SLO",
 			"description": "",
 			"collectionId": "54d87991-4933-06fd-3bdd-7aecd04f96e6",
-			"rawModeData": "{\n    \"email\": \"UserB@domainC\",\n    \"password\" : \"passwordC\"\n}"
+			"rawModeData": "{\n    \"email\": \"UserB@domainC.com\",\n    \"password\" : \"passwordC\"\n}"
 		},
 		{
 			"id": "b7960a0e-92c9-27b7-32a1-b6f243301df0",
@@ -1664,56 +1900,86 @@
 		{
 			"id": "bc25cfec-c2bd-bfa3-8a2a-aead5b307fcc",
 			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
 			"url": "{{url}}/Users",
+			"queryParams": [],
 			"preRequestScript": null,
 			"pathVariables": {},
+			"pathVariableData": [],
 			"method": "POST",
 			"data": [],
 			"dataMode": "raw",
 			"tests": "tests[\"Status code is 400\"] = responseCode.code === 400;\n\ntests[\"Body matches string\"] = responseBody.has(\"missingField\");\n\ntests[\"Body matches string\"] = responseBody.has(\"role\");",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1496997075751,
+			"time": 1497163536646,
 			"name": "Register Missing Role",
 			"description": "",
 			"collectionId": "54d87991-4933-06fd-3bdd-7aecd04f96e6",
-			"rawModeData": "{\n  \"email\": \"studentB@norole\",\n    \"firstName\": \"FirstA\",\n    \"lastName\": \"LastA\",\n    \"password\" : \"passwordA\",\n    \"termsAccepted\": true\n}"
+			"rawModeData": "{\n  \"email\": \"studentB@norole.com\",\n    \"firstName\": \"FirstA\",\n    \"lastName\": \"LastA\",\n    \"password\" : \"passwordA\",\n    \"termsAccepted\": true,\n    \"zip\" : \"93401\"\n}"
 		},
 		{
 			"id": "c14e0beb-8bf9-0e18-0ea9-63d6966e24c7",
 			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
 			"url": "{{url}}/Users",
+			"queryParams": [],
 			"preRequestScript": null,
 			"pathVariables": {},
+			"pathVariableData": [],
 			"method": "POST",
 			"data": [],
 			"dataMode": "raw",
 			"tests": "tests[\"Status code is 400\"] = responseCode.code === 400;\n\ntests[\"Body matches string\"] = responseBody.has(\"missingField\");\n\ntests[\"Body matches string\"] = responseBody.has(\"password\");",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1496997079661,
+			"time": 1497163542134,
 			"name": "Register Missing Password",
 			"description": "",
 			"collectionId": "54d87991-4933-06fd-3bdd-7aecd04f96e6",
-			"rawModeData": "{\n  \"email\": \"studentB@nopass\",\n    \"firstName\": \"FirstA\",\n    \"lastName\": \"LastA\",\n    \"role\"     : 0,\n    \"termsAccepted\": true\n}"
+			"rawModeData": "{\n  \"email\": \"studentB@nopass.com\",\n    \"firstName\": \"FirstA\",\n    \"lastName\": \"LastA\",\n    \"role\"     : 0,\n    \"termsAccepted\": true,\n    \"zip\" : \"93401\"\n}"
 		},
 		{
 			"id": "ca7615f3-4fee-41a5-26b4-9ec08ad0c55d",
 			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
 			"url": "{{url}}/Users",
+			"queryParams": [],
 			"preRequestScript": "",
 			"pathVariables": {},
+			"pathVariableData": [],
 			"method": "POST",
 			"data": [],
 			"dataMode": "raw",
 			"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1496997121996,
+			"time": 1497163621167,
 			"name": "Register Student A copy copy",
 			"description": "\n",
 			"collectionId": "54d87991-4933-06fd-3bdd-7aecd04f96e6",
-			"rawModeData": "{\n    \"email\": \"UserA@domainA\",\n    \"firstName\": \"FirstA\",\n    \"lastName\" : \"LastA\",\n    \"password\" : \"passwordA\",\n    \"role\"     : 0,\n    \"termsAccepted\": true,\n    \"zip\": \"93401\"\n}"
+			"rawModeData": "{\n    \"email\": \"UserA@domainA.com\",\n    \"firstName\": \"FirstA\",\n    \"lastName\" : \"LastA\",\n    \"password\" : \"passwordA\",\n    \"role\"     : 0,\n    \"termsAccepted\": true,\n    \"zip\": \"93401\"\n}"
 		},
 		{
 			"id": "cb5be285-111a-afd0-ee76-216972e81203",
@@ -1735,20 +2001,30 @@
 		{
 			"id": "d03c352d-b510-ed53-2eb3-c724c6bd53d5",
 			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
 			"url": "{{url}}/Users",
+			"queryParams": [],
 			"preRequestScript": null,
 			"pathVariables": {},
+			"pathVariableData": [],
 			"method": "POST",
 			"data": [],
 			"dataMode": "raw",
 			"tests": "tests[\"Status code is 400\"] = responseCode.code === 400;\n\ntests[\"Body matches string\"] = responseBody.has(\"noTerms\");\n",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1496997084622,
+			"time": 1497163555917,
 			"name": "Register Unaccepted Terms",
 			"description": "",
 			"collectionId": "54d87991-4933-06fd-3bdd-7aecd04f96e6",
-			"rawModeData": "{\n  \"email\": \"studentB@unacceptedterms\",\n    \"firstName\": \"FirstA\",\n    \"lastName\": \"LastA\",\n    \"role\"     : 0,\n    \"password\" : \"passwordA\",\n    \"termsAccepted\": false\n}"
+			"rawModeData": "{\n  \"email\": \"studentB@unacceptedterms.com\",\n    \"firstName\": \"FirstA\",\n    \"lastName\": \"LastA\",\n    \"role\"     : 0,\n    \"password\" : \"passwordA\",\n    \"termsAccepted\": false,\n    \"zip\" : \"93401\"\n}"
 		},
 		{
 			"folder": "8690842b-b24b-3fbc-280f-8fe403c09f86",
@@ -1828,20 +2104,30 @@
 		{
 			"id": "d5abf68d-bd2e-79ef-5960-e19e298548d4",
 			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
 			"url": "{{url}}/Users",
+			"queryParams": [],
 			"preRequestScript": null,
 			"pathVariables": {},
+			"pathVariableData": [],
 			"method": "POST",
 			"data": [],
 			"dataMode": "raw",
 			"tests": "tests[\"Status code is 400\"] = responseCode.code === 400;\n\ntests[\"Body matches string\"] = responseBody.has(\"noTerms\");\n",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1496997105100,
+			"time": 1497163505895,
 			"name": "Register Missing Zip",
 			"description": "",
 			"collectionId": "54d87991-4933-06fd-3bdd-7aecd04f96e6",
-			"rawModeData": "{\n  \"email\": \"studentB@noterms\",\n    \"firstName\": \"FirstA\",\n    \"lastName\": \"LastA\",\n    \"role\"     : 0,\n    \"password\" : \"passwordA\",\n    \"termsAccepted\": true\n}"
+			"rawModeData": "{\n  \"email\": \"studentB@noterms.com\",\n    \"firstName\": \"FirstA\",\n    \"lastName\": \"LastA\",\n    \"role\"     : 0,\n    \"password\" : \"passwordA\",\n    \"termsAccepted\": true\n}"
 		},
 		{
 			"id": "d63218b3-93e7-1560-7469-6cf4c30a49df",
@@ -1899,38 +2185,58 @@
 		{
 			"id": "dfc97838-42e2-bf5c-949d-50b57f05e90c",
 			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
 			"url": "{{url}}/Ssns",
+			"queryParams": [],
 			"preRequestScript": "",
 			"pathVariables": {},
+			"pathVariableData": [],
 			"method": "POST",
 			"data": [],
 			"dataMode": "raw",
 			"tests": "tests[\"Code 200\"] = responseCode.code === 200;\n\ntests[\"Cookie Returned\"] = postman.getResponseCookie(\"CHSAuth\")\n !== null && postman.getResponseCookie(\"CHSAuth\").value !== undefined;\nif (tests[\"Cookie Returned\"])\n   postman.setEnvironmentVariable(\"curLogin\",\n    postman.getResponseCookie(\"CHSAuth\").value)",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1496992532311,
+			"time": 1497163895774,
 			"name": "Login Student NY",
 			"description": "",
 			"collectionId": "54d87991-4933-06fd-3bdd-7aecd04f96e6",
-			"rawModeData": "{\n    \"email\": \"UserB@domainB\",\n    \"password\" : \"passwordB\"\n}"
+			"rawModeData": "{\n    \"email\": \"UserB@domainB.com\",\n    \"password\" : \"passwordB\"\n}"
 		},
 		{
 			"id": "dfde6fbf-29db-3e5a-5f06-a5886f565766",
 			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
 			"url": "{{url}}/Users",
+			"queryParams": [],
 			"preRequestScript": null,
 			"pathVariables": {},
+			"pathVariableData": [],
 			"method": "POST",
 			"data": [],
 			"dataMode": "raw",
 			"tests": "tests[\"Status code is 400\"] = responseCode.code === 400;\n\ntests[\"Body matches string\"] = responseBody.has(\"noTerms\");\n",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1496997082420,
+			"time": 1497163550357,
 			"name": "Register Missing Terms",
 			"description": "",
 			"collectionId": "54d87991-4933-06fd-3bdd-7aecd04f96e6",
-			"rawModeData": "{\n  \"email\": \"studentB@noterms\",\n    \"firstName\": \"FirstA\",\n    \"lastName\": \"LastA\",\n    \"role\"     : 0,\n    \"password\" : \"passwordA\"\n}"
+			"rawModeData": "{\n  \"email\": \"studentB@noterms.com\",\n    \"firstName\": \"FirstA\",\n    \"lastName\": \"LastA\",\n    \"role\"     : 0,\n    \"password\" : \"passwordA\",\n    \"zip\": \"93401\"\n}"
 		},
 		{
 			"id": "e2baa15d-4aa3-86a5-5f48-072884cb15bf",
@@ -2080,26 +2386,32 @@
 			"collectionId": "54d87991-4933-06fd-3bdd-7aecd04f96e6"
 		},
 		{
-			"folder": "32d11aa5-3c47-10bb-c999-565c3b196c36",
 			"id": "fbfd9246-475c-aff7-5d19-fb7b53f3415c",
-			"name": "Login Student A copy",
-			"dataMode": "raw",
-			"data": [],
-			"descriptionFormat": null,
-			"description": "",
-			"headers": "Content-Type: application/json",
-			"method": "POST",
-			"pathVariables": {},
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
 			"url": "{{url}}/Ssns",
+			"queryParams": [],
 			"preRequestScript": "",
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
 			"tests": "tests[\"Code 200\"] = responseCode.code === 200;\n\ntests[\"Cookie Returned\"] = postman.getResponseCookie(\"CHSAuth\")\n !== null && postman.getResponseCookie(\"CHSAuth\").value !== undefined;\nif (tests[\"Cookie Returned\"])\n   postman.setEnvironmentVariable(\"curLogin\",\n    postman.getResponseCookie(\"CHSAuth\").value)",
-			"currentHelper": null,
-			"helperAttributes": null,
-			"queryParams": null,
-			"headerData": null,
-			"pathVariableData": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1497163884751,
+			"name": "Login Student A copy",
+			"description": "",
 			"collectionId": "54d87991-4933-06fd-3bdd-7aecd04f96e6",
-			"rawModeData": "{\n    \"email\": \"UserA@domainA\",\n    \"password\" : \"passwordA\"\n}"
+			"rawModeData": "{\n    \"email\": \"UserA@domainA.com\",\n    \"password\" : \"passwordA\"\n}"
 		}
 	]
 }
