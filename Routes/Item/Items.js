@@ -3,6 +3,7 @@ var Tags = require('../Validator.js').Tags;
 var router = Express.Router({ caseSensitive: true });
 var async = require('async');
 var utils = require('../Utils.js');
+var fs = require('fs');
 
 router.baseURL = '/Items';
 
@@ -103,5 +104,35 @@ router.delete('/:itemId', function (req, res) {
       cnn.release();
    });
 });
+
+router.post('/:itemId/Image', function (req, res) {
+   var vld = req.validator;
+   var itemId = req.params.itemId;
+   var cnn = req.cnn;
+   var body;
+
+// https://stackoverflow.com/questions/17981677/using-post-data-to-write-to-local-file-with-node-js-and-express
+   req.on('data', function(data) {
+        body += data;
+    });
+
+   req.on('end', function (){
+      async.waterfall([
+      function (cb) {
+         cnn.chkQry('select * from Item where id = ?', [itemId], cb);
+      },
+      function (result, fields, cb) {
+         if (vld.check(result.length, Tags.notFound, null, cb) &&
+          vld.checkPrsOK(result[0].owernerId, cb)) {
+            var filePath = __dirname + '/images/' + i + 'jpg';
+            fs.appendFile(filePath, body, cb);
+         }
+      }],
+      function () {
+         res.status(200).end();
+         cnn.release();
+      })
+   }); 
+})
 
 module.exports = router;

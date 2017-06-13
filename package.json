@@ -8,6 +8,7 @@
     "body-parser": "^1.15.2",
     "cookie-parser": "^1.4.3",
     "express": "^4.14.0",
+    "fs": "0.0.1-security",
     "geolib": "^2.0.22",
     "google-geocoder": "^0.2.1",
     "mysql": "^2.11.1"
