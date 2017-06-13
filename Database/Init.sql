@@ -1,6 +1,6 @@
-drop database if exists sesingh;
-create database sesingh;
-use sesingh;
+drop database if exists eblist;
+create database eblist;
+use eblist;
 
 create table User (
    id int auto_increment primary key,

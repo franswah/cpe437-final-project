@@ -1,6 +1,6 @@
 {
     "host": "127.0.0.1",
-    "user": "jxfranci",
-    "password": "x@V1er2795",
-    "database": "jxfranci"
+    "user": "root",
+    "password": "root",
+    "database": "eblist"
 }
