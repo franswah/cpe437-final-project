@@ -539,16 +539,26 @@
 		{
 			"id": "28a00642-5d0a-9153-78b9-9c4ec0c2aa3a",
 			"headers": "Content-Type: application/json\n",
-			"url": "{{url}}/Categories/2/Items",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{url}}/Items/2",
+			"queryParams": [],
 			"preRequestScript": null,
 			"pathVariables": {},
+			"pathVariableData": [],
 			"method": "GET",
 			"data": [],
 			"dataMode": "raw",
 			"tests": "tests[\"Status code is 400\"] = responseCode.code === 400;\n\n",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1496992669610,
+			"time": 1497338443241,
 			"name": "Check if Item deleted",
 			"description": "",
 			"collectionId": "54d87991-4933-06fd-3bdd-7aecd04f96e6",
@@ -1092,20 +1102,30 @@
 		{
 			"id": "7330807f-8599-0531-da26-53e8e10b6011",
 			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
 			"url": "{{url}}/Items/2",
+			"queryParams": [],
 			"preRequestScript": null,
 			"pathVariables": {},
+			"pathVariableData": [],
 			"method": "DELETE",
 			"data": [],
 			"dataMode": "raw",
-			"tests": "tests[\"Status code is 200\"] = responseCode.code === 400;\n",
+			"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;\n",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1496992227573,
+			"time": 1497338418420,
 			"name": "Delete Item 2",
 			"description": "",
 			"collectionId": "54d87991-4933-06fd-3bdd-7aecd04f96e6",
-			"rawModeData": "{\n  \"title\" : \"Pan\",\n  \"description\" : \"Good\",\n  \"price\" : 300,\n  \"zip\" : 43322\n}"
+			"rawModeData": ""
 		},
 		{
 			"id": "777a26df-a7d2-32c7-95a0-92d00f3fd02f",
