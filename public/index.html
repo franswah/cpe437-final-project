@@ -35,7 +35,8 @@
             <a ui-sref="profile">My Profile</a>
          </li>
          <li ng-if="!!user">
-            <a ui-sref="items">My Items</a>
+            <a ui-sref="items({pageTitle: 'My Items',
+             getItemsUrl: 'Users/' + {{user.id}} + '/Items'})">My Items</a>
          </li>
          <li ng-if="!!user">
             <a ui-sref="search">Search</a>

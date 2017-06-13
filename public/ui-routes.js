@@ -44,7 +44,7 @@ app.config(['$stateProvider', '$urlRouterProvider',
             getItemsUrl: 'Items',
             getItemsParams: undefined
          },
-         templateUrl: 'Item/myItems.template.html',
+         templateUrl: 'Item/itemOverview.template.html',
          controller: 'itemOverviewController',
          resolve: {
             pageTitle: ['$stateParams', function($stateParams) {
@@ -56,7 +56,7 @@ app.config(['$stateProvider', '$urlRouterProvider',
                    $http.get($stateParams.getItemsUrl + '?' +
                     $stateParams.getItemsParams)
                    .then(function(resp) {
-                      $stateParams.getItemsParams = undefined;
+                      delete $stateParams.getItemsParams;
                       return resp.data;
                    })
                    .catch(function(err) {
