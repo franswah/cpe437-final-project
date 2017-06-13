@@ -12,7 +12,7 @@ var utils = {
    // Appends distance field to each item in the array based off of
    // it's distance from refObject. If useFirst is true, then only
    // find the distance of the first item and insert that as the 
-   // distance for all items
+   // distance for all items. SSorts the list by distance as well.
    appendDistance: function(itemArr, refObject, useFirst) {
       var that = this;
       var distance;
@@ -33,6 +33,39 @@ var utils = {
          delete item.longitude;
          delete item.latitude;
       });
+
+      if (!useFirst) {
+         itemArr.sort(function(a, b) {
+            return a.distance - b.distance;
+         });
+      }
+   },
+
+   // Performs binary search on sorted array of objects with distance
+   cutoffDistance: function(itemArr, maxDistance) {
+      var start = 0;
+      var end = itemArr.length - 1;
+      var mid = (start + end) / 2;
+
+      while (start < end) {
+         if (itemArr[mid].distance > maxDistance) {
+            end = mid - 1;
+         } 
+         else if (itemArr[mid].distance < maxDistance) {
+            start = mid + 1;
+         }
+         mid = (start + end) / 2;
+      }
+
+      console.log("mid: " + mid);
+      console.log(itemArr);
+
+      if (itemArr[mid].distance > maxDistance) {
+         return itemArr.slice(0, mid);
+      }
+      else {
+         return itemArr.slice(0, mid+1);
+      }
    },
 
    findZipLatLng: function(zipObject, cb) {

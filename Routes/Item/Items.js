@@ -16,6 +16,10 @@ router.get('/', function (req, res) {
       function (err, itemArr) {
          utils.appendDistance(itemArr, req.session);
 
+         if (dist) {
+            itemArr = utils.cutoffDistance(itemArr, dist);
+         }
+
          res.json(itemArr);
          req.cnn.release();
       });
