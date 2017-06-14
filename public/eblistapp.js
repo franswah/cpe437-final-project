@@ -1,8 +1,7 @@
 
 var app = angular.module('mainApp', [
    'ui.router',
-   'ui.bootstrap',
-   'ngMaterial'
+   'ui.bootstrap'
 ]).run(function($rootScope, $http) {
    $rootScope.categories = {};
 
