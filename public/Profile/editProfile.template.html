@@ -1,0 +1,50 @@
+<div class="modal-header">
+   <h3 class="modal-title">{{dlgTitle}}</h3>
+</div>
+<div class = "modal-body">
+   <form>
+      <fieldset class="form-group">
+         <label>First Name</label>
+         <input type="text" class="form-control"
+          placeholder="{{user.firstName}}" ng-model="firstName">
+      </fieldset>
+      <fieldset class="form-group">
+         <label>Last Name</label>
+         <input type="text" class="form-control"
+          placeholder="{{user.lastName}}" ng-model="lastName" >
+      </fieldset>
+      <fieldset class="form-group">
+         <label>Zip Code</label>
+         <input type="number" ng-minlength="5" ng-maxlength="5"
+          class="form-control" placeholder="{{user.zip}}" ng-model="zip">
+      </fieldset>
+      <fieldset class="form-group">
+         <label>Old Password</label>
+         <input type="password" class="form-control"
+          placeholder="Old Password" ng-model="oldPassword">
+      </fieldset>
+      <fieldset class="form-group">
+         <label>New Password</label>
+         <input type="password" class="form-control"
+          placeholder="New Password" ng-model="password">
+      </fieldset>
+      <fieldset class="form-group">
+         <label>Confirm New Password</label>
+         <input type="password" class="form-control"
+          placeholder="Confirm New Password" ng-model="confPassword">
+      </fieldset>
+   </form>
+</div>
+<div class="modal-footer">
+   <button type="button" class="btn btn-primary"
+    ng-disabled="!(((firstName || lastName || zip) && 
+    !(oldPassword || password || confPassword)) || (oldPassword && password &&
+    password === confPassword))"
+    ng-click="$close({firstName: firstName, lastName: lastName, zip: zip,
+    oldPassword: oldPassword, password: password})">
+      OK
+   </button>
+   <button type="button" class="btn btn-warning" ng-click="$dismiss()">
+      Cancel
+   </button>
+</div>
