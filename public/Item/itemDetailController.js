@@ -26,7 +26,19 @@ app.controller('itemDetailController',
           $scope.newItemInfo);
       })
       .then(function() {
-         return $http.get('Items/' + $scope.item.id);
+         if ($scope.itemImage) {
+            var fd = new FormData();
+            fd.append('file', $scope.itemImage);
+            return $http.put('Items/' + $scope.item.id + '/Image', fd, {
+               transformRequest: angular.identity,
+               headers: {'Content-Type': undefined}
+            }).then(function(result) {
+               return $http.get('Users/' + $scope.user.id + '/Items');
+            });
+         }
+         else {
+            return $http.get('Users/' + $scope.user.id + '/Items');
+         }
       })
       .then(function(updatedItem) {
          $scope.item = updatedItem.data;

@@ -24,6 +24,10 @@
           ng-options="cat.id as cat.name for cat in allCategories">
          </select>
       </fieldset>
+         <fieldset class="form-group">
+         <label>Image</label>
+         <input type="file" accept="image/*" file-model="itemImage">
+      </fieldset>
    </form>
 </div>
 <div class="modal-footer">

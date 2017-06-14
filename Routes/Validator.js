@@ -23,7 +23,9 @@ Validator.Tags = {
    queryFailed: "queryFailed",
    forbiddenField: "forbiddenField",
    oldPwdMismatch: "oldPwdMismatch",
-   invalidCategory: "invalidCategory"
+   invalidCategory: "invalidCategory",
+   limitExceeded: "limitExceeded",
+   badFile: "badFile"
 };
 
 // Check |test|.  If false, add an error with tag and possibly empty array

@@ -7,6 +7,14 @@ var Session = require('./Routes/Session.js');
 var Validator = require('./Routes/Validator.js');
 var CnnPool = require('./Routes/CnnPool.js');
 
+var maxFileSize = 1000 * 1000 * 10;
+var multer = require('multer');
+var upload = multer({
+   limits: {
+      fileSize: maxFileSize
+   }
+}).single('file');
+
 var async = require('async');
 
 var app = express();
@@ -17,14 +25,20 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Parse all data request bodies using either JSON or raw bodyparser
 app.use(function(req, res, next) {
    if (req.path.endsWith('Image')) {
-      bodyParser.raw()(req, res, next);
+      upload(req, res, function (err) {
+         if (err) {
+            res.status(400).json([{tag: Validator.Tags.limitExceeded}]);
+         }
+         else {
+            next();
+         }
+      });
    }
    else {
       bodyParser.json()(req, res, next);
    }
 });
 
-// Image endpoint takes in raw data, not json
 
 // Attach cookies to req as req.cookies.<cookieName>
 app.use(cookieParser());
