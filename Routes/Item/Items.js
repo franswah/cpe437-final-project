@@ -13,14 +13,17 @@ router.get('/', function (req, res) {
    var title = req.query.title;
 
    var handler = function(err, itemArr) {
-      utils.appendDistance(itemArr, req.session);
+      if (req.session) {
+         utils.appendDistance(itemArr, req.session);
 
          if (dist) {
             itemArr = utils.cutoffDistance(itemArr, dist);
          }
+      }
+      
 
-         res.json(itemArr);
-         req.cnn.release();
+      res.json(itemArr);
+      req.cnn.release();
    };
 
    if (title) {
@@ -49,7 +52,8 @@ router.get('/:itemId', function (req, res) {
     ' where i.id = ?', [req.params.itemId],
       function (err, itemArr) {
          if (vld.check(itemArr.length, Tags.notFound)) {
-            utils.appendDistance(itemArr, req.session);
+            if (req.session)
+               utils.appendDistance(itemArr, req.session);
 
             res.json(itemArr[0]);
          }
@@ -121,6 +125,10 @@ router.put('/:itemId/Image', function (req, res) {
          console.log(req.body);
          fs.writeFile(filePath, req.body, cb);
       }
+   },
+   function(cb) {
+      cnn.chkQry("update Item set imageUrl = ? where id = ?", 
+          ['images/' + itemId + '.jpg', itemId], cb);
    }],
    function (err) {
       if (err) console.log(err);

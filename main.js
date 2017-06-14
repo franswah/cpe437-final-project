@@ -37,7 +37,9 @@ app.use(Session.router);
 app.use(function (req, res, next) {
    console.log(req.path);
    if (req.session || (req.method === 'POST' &&
-    (req.path === '/Users' || req.path === '/Ssns'))) {
+    (req.path === '/Users' || req.path === '/Ssns')) ||
+    (req.method === 'GET' && 
+    (req.path.startsWith('/Categories') || req.path.startsWith('/Items')))) {
       req.validator = new Validator(req, res);
       next();
    } else {
