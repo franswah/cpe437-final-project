@@ -28,15 +28,22 @@ router.get('/:id/Items', function (req, res) {
 
    var handler = function(err, itemArr) {
       if (req.session) {
-         utils.appendDistance(itemArr, req.session);
+         req.cnn.query('select latitude, longitude from User where id = ?',
+            [req.session.id], function(err, userArr) {
+            utils.appendDistance(itemArr, userArr[0]);
 
-         if (dist) {
-            itemArr = utils.cutoffDistance(itemArr, dist);
-         }
+            if (dist) {
+               itemArr = utils.cutoffDistance(itemArr, dist);
+            }
+
+            res.json(itemArr);
+            req.cnn.release();
+         });
       }
-
-      res.json(itemArr);
-      req.cnn.release();
+      else {
+         res.json(itemArr);
+         req.cnn.release();
+      }
    };
 
    if (title) {

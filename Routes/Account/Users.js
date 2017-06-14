@@ -174,10 +174,13 @@ router.get('/:userId/Items', function (req, res) {
        ' postTime, email, imageUrl from Item i join User u on ownerId = u.id' +
        ' where ownerId = ?', [userId],
        function (err, itemArr) {
-         utils.appendDistance(itemArr, req.session, true);
+          req.cnn.query('select latitude, longitude from User where id = ?',
+            [req.session.id], function(err, userArr) {
+            utils.appendDistance(itemArr, userArr[0]);
 
-         res.json(itemArr);
-         req.cnn.release();
+            res.json(itemArr);
+            req.cnn.release();
+         });
        }
       );
    }

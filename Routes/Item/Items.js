@@ -14,16 +14,22 @@ router.get('/', function (req, res) {
 
    var handler = function(err, itemArr) {
       if (req.session) {
-         utils.appendDistance(itemArr, req.session);
+         req.cnn.query('select latitude, longitude from User where id = ?',
+            [req.session.id], function(err, userArr) {
+            utils.appendDistance(itemArr, userArr[0]);
 
-         if (dist) {
-            itemArr = utils.cutoffDistance(itemArr, dist);
-         }
+            if (dist) {
+               itemArr = utils.cutoffDistance(itemArr, dist);
+            }
+
+            res.json(itemArr);
+            req.cnn.release();
+         });
       }
-      
-
-      res.json(itemArr);
-      req.cnn.release();
+      else {
+         res.json(itemArr);
+         req.cnn.release();
+      }
    };
 
    if (title) {
@@ -44,21 +50,34 @@ router.get('/:itemId', function (req, res) {
    var dist = req.query.radius;
    var title = req.query.title;
 
-   
-
-   req.cnn.query('select i.id, title, price, ownerId, zip, latitude,' +
-   ' longitude, description, categoryId,' +
-    ' postTime, email, imageUrl from Item i join User u on ownerId = u.id' +
-    ' where i.id = ?', [req.params.itemId],
-      function (err, itemArr) {
-         if (vld.check(itemArr.length, Tags.notFound)) {
-            if (req.session)
-               utils.appendDistance(itemArr, req.session);
-
-            res.json(itemArr[0]);
+   async.waterfall([
+   function (cb) {
+      req.cnn.query('select i.id, title, price, ownerId, zip, latitude,' +
+         ' longitude, description, categoryId,' +
+         ' postTime, email, imageUrl from Item i join User u on' +
+         ' ownerId = u.id where i.id = ?', [req.params.itemId], cb);
+   },
+   function (itemArr,fields, cb) {
+      if (vld.check(itemArr.length, Tags.notFound)) {
+         if (req.session) {
+            req.cnn.query('select latitude, longitude from User where id = ?',
+             [req.session.id], function(err, userArr) {
+               utils.appendDistance(itemArr, userArr[0]);
+               res.json(itemArr[0]);
+               req.cnn.release();
+             });
          }
+         else {
+            res.json(itemArr[0]);
+            req.cnn.release();
+         }
+      }
+      else {
          req.cnn.release();
-      });
+      }
+   }
+   ])
+   
 });
 
 router.put('/:itemId', function (req, res) {
@@ -131,7 +150,8 @@ router.put('/:itemId/Image', function (req, res) {
           ['images/' + itemId + '.jpg', itemId], cb);
    }],
    function (err) {
-      if (err) console.log(err);
+      if (err) 
+         console.log(err);
       res.status(200).end();
       cnn.release();
    })
