@@ -10,11 +10,7 @@ var cookieName = 'CHSAuth'; // Cookie key for authentication tokens
 // user details, login time, and time of last use, the latter for the purpose
 // of timing-out sessions that have been unused for too long.
 var Session = function Session(user) {
-   this.firstName = user.firstName;
-   this.lastName = user.lastName;
    this.id = user.id;
-   this.email = user.email;
-   this.role = user.role;
 
    this.loginTime = new Date().getTime();
    this.lastUsed = new Date().getTime();
