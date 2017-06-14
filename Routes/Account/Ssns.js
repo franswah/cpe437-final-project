@@ -2,6 +2,7 @@ var Express = require('express');
 var CnnPool = require('../CnnPool.js');
 var Tags = require('../Validator.js').Tags;
 var ssnUtil = require('../Session.js');
+var bodyParser = require('body-parser');
 var router = Express.Router({caseSensitive: true});
 
 router.baseURL = '/Ssns';
