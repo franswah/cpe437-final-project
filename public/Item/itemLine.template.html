@@ -1,11 +1,9 @@
-<a  href="#" ui-sref="cnvDetail({cnvId:{{cnv.id}}})">
-   {{item.title}} {{item.postTime | date : "medium"}} {{item.price}}</a>
+<span ng-if="!item.image" class="glyphicon glyphicon-remove-circle"></span>
+<!--<span ng-if="item.image">
+   <img src="{{item.image}}" alt="Item Image" width=100 height=100></img>
+</span>-->
 
-<button type="button" class="btn btn-default pull-right"
- ng-show="user && user.id == item.ownerId" ng-click="delete($index)">
-   <span class="glyphicon glyphicon-trash"></span>
-</button>
-<button type="button" class="btn btn-default btn-sm pull-right"
- ng-show="user && user.id == item.ownerId" ng-click="edit($index)">
-   <span class="glyphicon glyphicon-edit"></span>
-</button>
+<a  href="#" ui-sref="itemDetail({id:{{item.id}}})">
+   {{item.title}} - ${{(item.price / 100).toFixed(2)}} - 
+   {{item.postTime | date : "medium"}}
+</a>

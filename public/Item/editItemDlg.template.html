@@ -4,15 +4,34 @@
 <div class = "modal-body">
    <form>
       <fieldset class="form-group">
-         <label>Conversation Title</label>
+         <label>Post Title</label>
          <input type="text" class="form-control" placeholder="Title" 
           ng-model="title">
+      </fieldset>
+      <fieldset class="form-group">
+         <label>Item Description</label>
+         <input type="textarea" class="form-control" ng-model="desc" 
+         rows="5" placeholder="New Message">
+      </fieldset>
+      <fieldset class="form-group">
+         <label>Price in Dollars</label>
+         <input type="number" class="form-control" placeholder="Price" 
+          ng-model="price">
+      </fieldset>
+      <fieldset class="form-group">
+         <label>Category</label>
+         <select ng-model="inCat"
+          ng-options="cat.id as cat.name for cat in allCategories">
+         </select>
       </fieldset>
    </form>
 </div>
 <div class="modal-footer">
-   <button type="button" class="btn btn-primary" ng-disabled="!title"
-    ng-click="$close(title)">OK</button>
+   <button type="button" class="btn btn-primary"
+    ng-disabled="!title || !desc || !price || !inCat"
+    ng-click="$close({title: title, desc: desc, price: price, cat: inCat})">
+      OK
+   </button>
    <button type="button" class="btn btn-warning" ng-click="$dismiss()">
       Cancel
    </button>
