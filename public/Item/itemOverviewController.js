@@ -59,11 +59,9 @@ app.controller('itemOverviewController',
          $state.reload();
       })
       .catch(function(err) {
-         console.log("Failed to post new item: " + JSON.stringify(err));
-         /*if (err.data[0].tag == "dupTitle")
-            nDlg.show($scope, "Another conversation already has title " +
-             selectedTitle,
-             "Error");*/
+         if (err) {
+            nDlg.show($scope, "Failed to post new item", "Error");
+         }
       });
    }
 }]);

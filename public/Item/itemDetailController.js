@@ -33,11 +33,11 @@ app.controller('itemDetailController',
                transformRequest: angular.identity,
                headers: {'Content-Type': undefined}
             }).then(function(result) {
-               return $http.get('Users/' + $scope.user.id + '/Items');
+               return $http.get('Items/' + $scope.item.id);
             });
          }
          else {
-            return $http.get('Users/' + $scope.user.id + '/Items');
+            return $http.get('Items/' + $scope.item.id);
          }
       })
       .then(function(updatedItem) {
