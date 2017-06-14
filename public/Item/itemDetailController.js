@@ -22,8 +22,11 @@ app.controller('itemDetailController',
             $scope.newItemInfo.price = newItem.price * 100;
          }
 
-         return $http.put('Items/' + $scope.item.id,
-          $scope.newItemInfo);
+         if ($scope.newItemInfo.title || $scope.newItemInfo.desc ||
+          $scope.newItemInfo.price) {
+            return $http.put('Items/' + $scope.item.id,
+             $scope.newItemInfo);
+         }
       })
       .then(function() {
          if ($scope.itemImage) {
