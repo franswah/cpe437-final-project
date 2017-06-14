@@ -22,7 +22,7 @@ app.controller('itemDetailController',
             $scope.newItemInfo.price = newItem.price * 100;
          }
 
-         if ($scope.newItemInfo.title || $scope.newItemInfo.desc ||
+         if ($scope.newItemInfo.title || $scope.newItemInfo.description ||
           $scope.newItemInfo.price) {
             return $http.put('Items/' + $scope.item.id,
              $scope.newItemInfo);
@@ -44,6 +44,7 @@ app.controller('itemDetailController',
          }
       })
       .then(function(updatedItem) {
+         updatedItem.data.imageUrl += '?v=' + new Date().getTime();
          $scope.item = updatedItem.data;
       })
       .catch(function(err) {
