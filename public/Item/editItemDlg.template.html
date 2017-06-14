@@ -28,7 +28,7 @@
 </div>
 <div class="modal-footer">
    <button type="button" class="btn btn-primary"
-    ng-disabled="!title || !desc || !price || !inCat"
+    ng-disabled="!title || !desc || !price || !(inCat || inCat >= 0)"
     ng-click="$close({title: title, desc: desc, price: price, cat: inCat})">
       OK
    </button>
