@@ -38,40 +38,114 @@ app.config(['$stateProvider', '$urlRouterProvider',
 
       })
       .state('items', {
-         url: '/items',
-         params: {
-            pageTitle: 'Items',
-            getItemsUrl: 'Items',
-            getItemsParams: undefined
-         },
+         url: '/Items?radius&title',
          templateUrl: 'Item/itemOverview.template.html',
          controller: 'itemOverviewController',
          resolve: {
             pageTitle: ['$stateParams', function($stateParams) {
-               return $stateParams.pageTitle;
+               if ($stateParams.title) {
+                  return 'Search Results';
+               }
+               else {
+                  return 'All Items';
+               }
             }],
             itemsToDisplay: ['$http', '$stateParams',
              function($http, $stateParams) {
-                if ($stateParams.getItemsParams) {
-                   return $http.get($stateParams.getItemsUrl + '?' +
-                    $stateParams.getItemsParams)
-                   .then(function(resp) {
-                      delete $stateParams.getItemsParams;
-                      return resp.data;
-                   })
-                   .catch(function(err) {
-                      console.log(err);
-                   })
+                if ($stateParams.title) {
+                   if ($stateParams.radius) {
+                      return $http.get('/Items?radius=' + $stateParams.radius +
+                       '&title=' + $stateParams.title)
+                      .then(function(response) {
+                         return response.data;
+                      });
+                   }
+                   else {
+                      return $http.get('/Items?title=' + $stateParams.title)
+                      .then(function(response) {
+                         return response.data;
+                      });
+                   }
                 }
                 else {
-                   return $http.get($stateParams.getItemsUrl)
-                   .then(function(resp) {
-                      return resp.data;
-                   })
-                   .catch(function(err) {
-                      console.log(err);
-                   })
+                   return $http.get('/Items')
+                   .then(function(response) {
+                      return response.data;
+                   });
                 }
+            }],
+            allCategories: ['$http', function($http) {
+               return $http.get("Categories")
+               .then(function(resp) {
+                  return resp.data;
+               });
+            }]
+         }
+      })
+      .state('itemsByCategory', {
+         url: '/Categories/:id/Items?radius&title',
+         templateUrl: 'Item/itemOverview.template.html',
+         controller: 'itemOverviewController',
+         resolve: {
+            pageTitle: ['$http', '$stateParams',
+             function($http, $stateParams) {
+               return $http.get("Categories")
+               .then(function(allCats) {
+                  return allCats.data[$stateParams.id].name;
+               });
+            }],
+            itemsToDisplay: ['$http', '$stateParams',
+             function($http, $stateParams) {
+                if ($stateParams.title) {
+                   if ($stateParams.radius) {
+                      return $http.get('/Categories/' + $stateParams.id +
+                       '/Items?radius=' + $stateParams.radius +
+                       '&title=' + $stateParams.title)
+                      .then(function(response) {
+                         return response.data;
+                      });
+                   }
+                   else {
+                      return $http.get('/Categories/' + $stateParams.id +
+                       '/Items?title=' + $stateParams.title)
+                      .then(function(response) {
+                         return response.data;
+                      });
+                   }
+                }
+                else {
+                   return $http.get('/Categories/' + $stateParams.id +
+                    '/Items')
+                   .then(function(response) {
+                      return response.data;
+                   });
+                }
+            }],
+            allCategories: ['$http', function($http) {
+               return $http.get("Categories")
+               .then(function(resp) {
+                  return resp.data;
+               });
+            }]
+         }
+      })
+      .state('myItems', {
+         url: '/Users/:id/Items',
+         templateUrl: 'Item/itemOverview.template.html',
+         controller: 'itemOverviewController',
+         resolve: {
+            pageTitle: ['$stateParams', function($stateParams) {
+               return 'My Items';
+            }],
+            itemsToDisplay: ['$http', '$stateParams',
+             function($http, $stateParams) {
+               return $http.get('Users/' + $stateParams.id + '/Items')
+               .then(function(resp) {
+                  return resp.data;
+               })
+               .catch(function(err) {
+                  console.log(err);
+               });
             }],
             allCategories: ['$http', function($http) {
                return $http.get("Categories")
