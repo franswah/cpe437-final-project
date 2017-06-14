@@ -48,6 +48,7 @@ var utils = {
       var mid = (start + end) / 2;
 
       while (start < end) {
+         if (mid > itemArr.length) mid--;
          if (itemArr[mid].distance > maxDistance) {
             end = mid - 1;
          } 
