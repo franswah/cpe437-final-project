@@ -47,23 +47,12 @@ var utils = {
       var end = itemArr.length - 1;
       var mid = (start + end) / 2;
 
-      while (start < end) {
-         if (mid > itemArr.length) mid--;
-         if (itemArr[mid].distance > maxDistance) {
-            end = mid - 1;
-         } 
-         else if (itemArr[mid].distance < maxDistance) {
-            start = mid + 1;
+      for (var i = 0; i < itemArr.length; i++) {
+         if (itemArr[i].distance > maxDistance) {
+            return itemArr.slice(0, i);
          }
-         mid = (start + end) / 2;
       }
-
-      if (itemArr[mid].distance > maxDistance) {
-         return itemArr.slice(0, mid);
-      }
-      else {
-         return itemArr.slice(0, mid+1);
-      }
+      return itemArr;
    },
 
    findZipLatLng: function(zipObject, cb) {
