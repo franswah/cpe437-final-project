@@ -57,9 +57,6 @@ var utils = {
          mid = (start + end) / 2;
       }
 
-      console.log("mid: " + mid);
-      console.log(itemArr);
-
       if (itemArr[mid].distance > maxDistance) {
          return itemArr.slice(0, mid);
       }

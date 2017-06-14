@@ -2,4 +2,4 @@
 **/bower_components
 Routes/connection.json
 Database/Init.sql
-public/images
+public/images/*
