@@ -7,7 +7,6 @@ var app = angular.module('mainApp', [
 
    $http.get("Categories")
    .then(function(resp) {
-      console.log(resp.data);
       $rootScope.categories = resp.data;
    });
 });
