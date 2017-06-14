@@ -5,6 +5,15 @@ var app = angular.module('mainApp', [
 ]).run(function($rootScope, $http) {
    $rootScope.categories = {};
 
+   //Track the previous state for transitioning back
+   $rootScope.$on('$stateChangeSuccess',
+    function(event, to, toParams, from, fromParams) {
+      $rootScope.$previousState = from;
+      $rootScope.$previousStateParams = fromParams;
+      $rootScope.$currentState = to;
+      $rootScope.$currentStateParams = toParams;
+   });
+
    $http.get("Categories")
    .then(function(resp) {
       $rootScope.categories = resp.data;

@@ -53,7 +53,7 @@ router.post('/', function(req, res) {
        vld.chain(body.role === 0 || admin, Tags.noPermission)
        .chain(body.termsAccepted || admin, Tags.noTerms)
        .chain(body.email.match(emailRegex), Tags.badValue, ["email"])
-       .chain(body.zip.match(/(^\d{5}$)/), Tags.badValue, ["zip"])
+       /*.chain(body.zip.match(/(^\d{5}$)/), Tags.badValue, ["zip"])*/
        .check(body.role >= 0 && body.role <= 1, Tags.badValue, ["role"], cb)) {
          cnn.chkQry('select * from User where email = ?', body.email, cb);
       }

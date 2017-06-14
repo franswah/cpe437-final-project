@@ -1,16 +1,28 @@
 <h2>{{item.title}} - ${{(item.price / 100).toFixed(2)}}</h2>
+
 <span ng-if="item.imageUrl">
    <img src="{{item.imageUrl}}" alt="Item Image" width=500 ></img>
 </span>
+
 <div ng-if="user && item.distance >= 0">
-   Distance: {{item.distance.toFixed(1)}} mile(s) away
+ {{item.distance.toFixed(1)}} mile(s) away
 </div>
+
 <div>Description:</div>
-<div>{{item.description}}</div>
-<div>Posted by {{item.email}} on {{item.postTime | date : "longDate"}} at 
+<div style="margin-left:15px;">{{item.description}}</div>
+
+
+<div style="margin-top:20px;">Posted by {{item.email}} on 
+ {{item.postTime | date : "longDate"}} at 
  {{item.postTime | date : "shortTime"}}
-   <button type="button" class="btn btn-default"
+</div>
+<div>
+   <button type="button" class="btn btn-primary"
     ng-show="user && user.id === item.ownerId"
-    ng-click="editItem()">Edit Item Post
+    ng-click="editItem()">Edit Item
+   </button>
+   <button type="button" class="btn btn-danger"
+    ng-show="user && user.id === item.ownerId"
+    ng-click="delItem()">Delete Item
    </button>
 </div>

@@ -1,27 +1,20 @@
 <div>
     <h1>My Profile</h1>
+
     <fieldset class="form-group">
         <label>Email address: {{user.email}}</label>
     </fieldset>
     <fieldset class="form-group">
-        <label>First Name</label>
-        <input type="text" class="form-control" placeholder="{{user.firstName}}"
-               ng-model="edit.firstName">
+        <label>First Name: {{user.firstName}}</label>
     </fieldset>
     <fieldset class="form-group">
-        <label>Last Name</label>
-        <input type="text" class="form-control" placeholder="{{user.lastName}}"
-               ng-model="edit.lastName">
+        <label>Last Name: {{user.lastName}}</label>
     </fieldset>
     <fieldset class="form-group">
-        <label>Zip Code</label>
-        <input type="text" class="form-control" placeholder="{{user.zip}}"
-               ng-model="edit.zip">
+        <label>Zip Code: {{user.zip}}</label>
     </fieldset>
-    <button type="submit" class="btn btn-primary" ng-click="changePass()">
-        Change Password</button>
-    <button type="button" class="btn btn-warning" ng-click="makeEdits()">
-        Make Edits
-    </button>
 
+    <button type="button" class="btn btn-primary" ng-click="editProfile()">
+        Edit Profile
+    </button>
 </div>

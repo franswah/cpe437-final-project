@@ -18,7 +18,7 @@
          <input type="number" class="form-control" placeholder="Price" 
           ng-model="price">
       </fieldset>
-      <fieldset class="form-group">
+      <fieldset ng-show="postToCategory < 0" class="form-group">
          <label>Category</label>
          <select ng-model="inCat"
           ng-options="cat.id as cat.name for cat in allCategories">
@@ -32,7 +32,7 @@
 </div>
 <div class="modal-footer">
    <button type="button" class="btn btn-primary"
-    ng-disabled="!title || !desc || !price || !(inCat || inCat >= 0)"
+    ng-disabled="!title || !desc || !price || !(inCat >= 0 || postToCategory >= 0)"
     ng-click="$close({title: title, desc: desc, price: price, cat: inCat})">
       OK
    </button>

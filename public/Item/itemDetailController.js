@@ -1,6 +1,7 @@
 app.controller('itemDetailController',
- ['$scope', '$state', '$http', '$uibModal', 'notifyDlg', 'item',
- function($scope, $state, $http, $uibM, nDlg, item) {
+ ['$rootScope', '$scope', '$state', '$http', '$uibModal',
+  '$q', 'notifyDlg', 'item', function($rootScope, $scope,
+  $state, $http, $uibM, $q, nDlg, item) {
    $scope.item = item;
 
    $scope.editItem = function() {
@@ -32,11 +33,11 @@ app.controller('itemDetailController',
                transformRequest: angular.identity,
                headers: {'Content-Type': undefined}
             }).then(function(result) {
-               return $http.get('Users/' + $scope.user.id + '/Items');
+               return $http.get('Items/' + $scope.item.id);
             });
          }
          else {
-            return $http.get('Users/' + $scope.user.id + '/Items');
+            return $http.get('Items/' + $scope.item.id);
          }
       })
       .then(function(updatedItem) {
@@ -45,6 +46,31 @@ app.controller('itemDetailController',
       .catch(function(err) {
          if (err) {
             nDlg.show($scope, "Failed to update item post", "Error");
+         }
+      });
+   }
+
+   $scope.delItem = function() {
+      nDlg.show($scope,
+          "Are you sure you want to delete this item?",
+          "Delete Item", ["Yes", "No"])
+      .then(function(btn) {
+         if (btn === "Yes") {
+            return $http.delete("Items/" + $scope.item.id)
+         }
+         else {
+            return $q.reject('No');
+         }
+      })
+      .then(function() {
+            $state.go($rootScope.$previousState,
+             $rootScope.$previousStateParams);
+      })
+      .catch(function(err) {
+         if (err !== 'No')
+         {
+            console.log("An error occurred deleting this message");
+            console.log(err);
          }
       });
    }
