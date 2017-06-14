@@ -123,7 +123,7 @@ app.use(function (req, res, next) {
    req.cnn.release();
 });
 
-var PORT = 3000;
+var PORT = 3006;
 
 for (var i = 0; i < process.argv.length; i++) {
    if (process.argv[i] === "-p" && ++i < process.argv.length) {
