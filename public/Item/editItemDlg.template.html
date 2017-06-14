@@ -4,32 +4,27 @@
 <div class = "modal-body">
    <form>
       <fieldset class="form-group">
-         <label>Post Title</label>
-         <input type="text" class="form-control" placeholder="Title" 
+         <label>New Title</label>
+         <input type="text" class="form-control" placeholder="{{item.title}}" 
           ng-model="title">
       </fieldset>
       <fieldset class="form-group">
-         <label>Item Description</label>
+         <label>New Description</label>
          <input type="textarea" class="form-control" ng-model="desc" 
-         rows="5" placeholder="New Message">
+         rows="5" placeholder="{{item.description}}">
       </fieldset>
       <fieldset class="form-group">
-         <label>Price in Dollars</label>
-         <input type="number" class="form-control" placeholder="Price" 
+         <label>New Price in Dollars</label>
+         <input type="number" class="form-control"
+          placeholder="{{(item.price / 100).toFixed(2)}}" 
           ng-model="price">
-      </fieldset>
-      <fieldset class="form-group">
-         <label>Category</label>
-         <select ng-model="inCat"
-          ng-options="cat.id as cat.name for cat in allCategories">
-         </select>
       </fieldset>
    </form>
 </div>
 <div class="modal-footer">
    <button type="button" class="btn btn-primary"
-    ng-disabled="!title || !desc || !price || !(inCat || inCat >= 0)"
-    ng-click="$close({title: title, desc: desc, price: price, cat: inCat})">
+    ng-disabled="!title && !desc && !price"
+    ng-click="$close({title: title, desc: desc, price: price})">
       OK
    </button>
    <button type="button" class="btn btn-warning" ng-click="$dismiss()">
