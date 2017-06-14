@@ -122,8 +122,8 @@ router.put('/:itemId/Image', function (req, res) {
       if (vld.check(result.length, Tags.notFound, null, cb) &&
          vld.checkPrsOK(result[0].ownerId, cb)) {
          var filePath = __dirname + '/../../public/images/' + itemId + '.jpg';
-         console.log(req.body);
-         fs.writeFile(filePath, req.body, cb);
+         console.log(req.file);
+         fs.writeFile(filePath, req.file.buffer, cb);
       }
    },
    function(cb) {

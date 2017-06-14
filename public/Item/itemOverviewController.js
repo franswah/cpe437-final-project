@@ -29,8 +29,22 @@ app.controller('itemOverviewController',
          return $http.post("Categories/" + postToCategory + "/Items",
           $scope.newItemInfo);
       })
-      .then(function() {
-         return $http.get('Users/' + $scope.user.id + '/Items');
+      .then(function(result) {
+         var locationArr = result.headers('Location').split('/');
+         var itemId = locationArr[locationArr.length-1];
+         if ($scope.itemImage) {
+            var fd = new FormData();
+            fd.append('file', $scope.itemImage);
+            return $http.put('Items/' + itemId + '/Image', fd, {
+               transformRequest: angular.identity,
+               headers: {'Content-Type': undefined}
+            }).then(function(result) {
+               return $http.get('Users/' + $scope.user.id + '/Items');
+            });
+         }
+         else {
+            return $http.get('Users/' + $scope.user.id + '/Items');
+         }
       })
       .then(function(myItems) {
          $scope.itemsToDisplay = myItems.data;
