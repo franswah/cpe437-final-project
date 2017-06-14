@@ -1,6 +1,6 @@
 <span ng-if="!item.imageUrl" class="glyphicon glyphicon-remove-circle"></span>
 <span  ng-if="item.imageUrl">
-      <img src="{{item.imageUrl}}" alt="Item Image" width="100"></img>
+      <img ng-src="{{item.imageUrl}}" alt="Item Image" width="100"></img>
 </span>
 
 <a class="item-listing" href="#" ui-sref="itemDetail({id:{{item.id}}})">

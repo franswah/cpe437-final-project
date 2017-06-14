@@ -1,7 +1,7 @@
 <h2>{{item.title}} - ${{(item.price / 100).toFixed(2)}}</h2>
 
 <span ng-if="item.imageUrl">
-   <img src="{{item.imageUrl}}" alt="Item Image" width=500 ></img>
+   <img ng-src="{{item.imageUrl}}" alt="Item Image" width=500 ></img>
 </span>
 
 <div ng-if="user && item.distance >= 0">
