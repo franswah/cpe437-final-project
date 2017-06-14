@@ -53,7 +53,7 @@ app.config(['$stateProvider', '$urlRouterProvider',
             itemsToDisplay: ['$http', '$stateParams',
              function($http, $stateParams) {
                 if ($stateParams.getItemsParams) {
-                   $http.get($stateParams.getItemsUrl + '?' +
+                   return $http.get($stateParams.getItemsUrl + '?' +
                     $stateParams.getItemsParams)
                    .then(function(resp) {
                       delete $stateParams.getItemsParams;
@@ -64,7 +64,7 @@ app.config(['$stateProvider', '$urlRouterProvider',
                    })
                 }
                 else {
-                   $http.get($stateParams.getItemsUrl)
+                   return $http.get($stateParams.getItemsUrl)
                    .then(function(resp) {
                       return resp.data;
                    })
@@ -72,6 +72,26 @@ app.config(['$stateProvider', '$urlRouterProvider',
                       console.log(err);
                    })
                 }
+            }],
+            allCategories: ['$http', function($http) {
+               return $http.get("Categories")
+               .then(function(resp) {
+                  return resp.data;
+               });
+            }]
+         }
+      })
+      .state('itemDetail', {
+         url: '/Items/:id',
+         templateUrl: 'Item/itemDetail.template.html',
+         controller: 'itemDetailController',
+         resolve: {
+            item: ['$q', '$http', '$stateParams',
+             function($q, $http, $stateParams) {
+               return $http.get('/Items/' + $stateParams.id)
+               .then(function(response) {
+                  return response.data;
+               });
             }]
          }
       })
@@ -81,7 +101,7 @@ app.config(['$stateProvider', '$urlRouterProvider',
          controller: 'searchController',
          resolve: {
             allCategories: ['$http', function($http) {
-               $http.get("Categories")
+               return $http.get("Categories")
                .then(function(resp) {
                   return resp.data;
                });

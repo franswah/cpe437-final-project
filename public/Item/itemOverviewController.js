@@ -1,11 +1,49 @@
 app.controller('itemOverviewController',
  ['$scope', '$state', '$http', '$uibModal', 'notifyDlg',
- 'pageTitle', 'itemsToDisplay',
- function($scope, $state, $http, $uibM, nDlg, pageTitle, itemsToDisplay) {
+ 'pageTitle', 'itemsToDisplay', 'allCategories',
+ function($scope, $state, $http, $uibM, nDlg, pageTitle,
+ itemsToDisplay, allCategories) {
    //Injected from stateParams being passed through resolve in ui-router
    $scope.pageTitle = pageTitle;
    $scope.itemsToDisplay = itemsToDisplay;
+   $scope.allCategories = allCategories;
 
+   $scope.newItem = function() {
+      //Populated with title, desc, price, and cat from modal dialog
+      $scope.newItemInfo = {};
+      $scope.dlgTitle = "New Item";
+      var postToCategory = -1;
+
+      $uibM.open({
+         templateUrl: 'Item/editItemDlg.template.html',
+         scope: $scope
+      }).result
+      .then(function(newItem) {
+         //Retrieve the category to post the new item to
+         postToCategory = newItem.cat;
+         //Populate the body of the upcoming post
+         $scope.newItemInfo.title = newItem.title;
+         $scope.newItemInfo.description = newItem.desc;
+         $scope.newItemInfo.price = newItem.price * 100;
+
+         return $http.post("Categories/" + postToCategory + "/Items",
+          $scope.newItemInfo);
+      })
+      .then(function() {
+         return $http.get('Users/' + $scope.user.id + '/Items');
+      })
+      .then(function(myItems) {
+         $scope.itemsToDisplay = myItems.data;
+         $scope.pageTitle = 'My Items';
+      })
+      .catch(function(err) {
+         console.log("Failed to post new item: " + JSON.stringify(err));
+         /*if (err.data[0].tag == "dupTitle")
+            nDlg.show($scope, "Another conversation already has title " +
+             selectedTitle,
+             "Error");*/
+      });
+   }
 
     //EVERYTHING BELOW HERE IS OLD CHS CODE FOR REFERENCE, REMOVE WHEN DONE
 

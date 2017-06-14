@@ -14,8 +14,17 @@ var app = express();
 // Static paths to be served like index.html and all client side js
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Parse all request bodies using JSON
-app.use(bodyParser.json());
+// Parse all data request bodies using either JSON or raw bodyparser
+app.use(function(req, res, next) {
+   if (req.path.endsWith('Image')) {
+      bodyParser.raw()(req, res, next);
+   }
+   else {
+      bodyParser.json()(req, res, next);
+   }
+});
+
+// Image endpoint takes in raw data, not json
 
 // Attach cookies to req as req.cookies.<cookieName>
 app.use(cookieParser());

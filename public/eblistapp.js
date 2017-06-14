@@ -56,15 +56,12 @@ app.filter('tagError', ['$rootScope', 'errMap',
    };
 }]);
 
-app.directive('myItems', [function() {
+app.directive('itemListing', [function() {
    return {
       restrict: 'E',
       transclude: true,
       scope: {
          item: "=item",
-         user: '=user',
-         edit: '&editItem',
-         del: '&delItem'
       },
 
       templateUrl: 'Item/itemLine.template.html'

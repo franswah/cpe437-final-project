@@ -1,8 +1,7 @@
 <h2>{{pageTitle}}</h2>
 <div class="list-group">
    <div class="list-group-item" ng-repeat="item in itemsToDisplay">
-      <my-items class="list-group-item" item="item" on-edit="editItem($index)"
-       on-delete="delItem($index)" user-info="user"></my-items>
+      <item-listing item="item"></item-listing>
    </div>
 </div>
 

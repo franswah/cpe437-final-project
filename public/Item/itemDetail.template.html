@@ -1,17 +1,12 @@
-<h2>{{ cnv.title }}</h2>
-<div class="list-group">
-   <div class="list-group-item" ng-repeat="msg in msgs">
-      <div class="msg-header">
-         {{ msg.whenMade | date:'medium'}} by {{ msg.email }}
-      </div>
-      <div class="msg-content">
-         {{ msg.content }}
-      </div>
-   </div>
+<h2>{{item.title}}</h2>
+<!--<span ng-if="item.image">
+   <img src="{{item.image}}" alt="Item Image" width=100 height=100></img>
+</span>-->
+<div>{{item.description}}</div>
+<div>Posted by: {{item.email}} on {{item.postTime | date : "longDate"}} at 
+   {{item.postTime | date : "shortTime"}}
+   <button type="button" class="btn btn-default"
+    ng-show="user && user.id === item.ownerId"
+    ng-click="editItem()">Edit Item Post
+   </button>
 </div>
-<form>
-   <input type="textarea" class="form-control" name="input" ng-model="content"
-     rows="5" placeholder="New Message">
-   <button type="submit" class="btn btn-primary" ng-disabled="!content"
-    ng-click="send(content)" style="margin-top: 5px;">Send</button>
-</form>
