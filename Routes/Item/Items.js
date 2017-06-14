@@ -119,10 +119,10 @@ router.put('/:itemId/Image', function (req, res) {
       cnn.chkQry('select * from Item where id = ?', [itemId], cb);
    },
    function (result, fields, cb) {
-      if (vld.check(result.length, Tags.notFound, null, cb) &&
+      if (vld.check(req.file && req.file.buffer, Tags.badFile, null, cb) &&
+         vld.check(result.length, Tags.notFound, null, cb) &&
          vld.checkPrsOK(result[0].ownerId, cb)) {
          var filePath = __dirname + '/../../public/images/' + itemId + '.jpg';
-         console.log(req.file);
          fs.writeFile(filePath, req.file.buffer, cb);
       }
    },
