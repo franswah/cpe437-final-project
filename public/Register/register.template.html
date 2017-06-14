@@ -24,8 +24,8 @@
       </fieldset>
       <fieldset class="form-group">
           <label>Zip Code</label>
-          <input type="text" class="form-control" placeholder="Zip"
-                 ng-model="user.zip">
+          <input type="number" ng-minlength="5" ng-maxlength="5"
+           class="form-control" placeholder="Zip" ng-model="user.zip">
       </fieldset>
       <fieldset class="form-group">
          <label>Password</label>
@@ -46,8 +46,9 @@
      </div>
 
       <button type="submit" class="btn btn-primary" ng-click="registerUser()"
-       ng-disabled="user.password !== confPass || !user.email || !user.password
-        || !user.termsAccepted">Submit</button>
+       ng-disabled="!(user.email && user.firstName && user.lastName &&
+       user.zip && user.password && user.password === confPass &&
+       user.termsAccepted)">Submit</button>
       <button type="button" class="btn btn-warning" ng-click="quit()">
          Cancel
       </button>

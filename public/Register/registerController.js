@@ -1,6 +1,6 @@
 app.controller('registerController',
- ['$scope', '$state', '$http', 'notifyDlg', 'login',
- function($scope, $state, $http, nDlg, login) {
+ ['$q', '$scope', '$state', '$http', 'notifyDlg', 'login',
+ function($q, $scope, $state, $http, nDlg, login) {
    $scope.user = {role: 0};
    $scope.errors = [];
 
@@ -16,6 +16,7 @@ app.controller('registerController',
             return login.login($scope.user)
          else {
             $state.go('home');
+            return $q.reject('No');
          }
       })
       .then(function(user) {
@@ -23,7 +24,9 @@ app.controller('registerController',
          $state.go('home');
        })
       .catch(function(err) {
-         $scope.errors = err.data;
+         if (err !== 'No') {
+             $scope.errors = err.data;
+         }
       });
    };
 
