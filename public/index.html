@@ -6,7 +6,13 @@
 <script src="bower_components/angular/angular.min.js"></script>
 <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
 <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+<script src="bower_components/angular-aria/angular-aria.js"></script>
+<script src="bower_components/angular-animate/angular-animate.js"></script>
+<script src="bower_components/angular-material/angular-material.min.js"></script>
+<link rel="stylesheet" href="bower_components/angular-material/angular-material.css">
+<link href="simple-sidebar.css" rel="stylesheet">
 <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css"></script>
+
 
 <script src="eblistapp.js"></script>
 <link rel="stylesheet" href="eblistapp.css"></script>
@@ -23,35 +29,57 @@
 <script src="ui-routes.js"></script>
 
 <body ng-app="mainApp">
-   <nav class="navbar navbar-default">
-      <ul class="nav navbar-nav">
-         <li ng-if="!user">
-            <a ui-sref="login">Login</a>
-         </li>
-         <li ng-if="!user">
-            <a ui-sref="register">Register</a>
-         </li>
-         <li ng-if="!!user">
-            <a ui-sref="profile">My Profile</a>
-         </li>
-         <li ng-if="!!user">
-            <a ui-sref="items({pageTitle: 'My Items',
-             getItemsUrl: 'Users/' + {{user.id}} + '/Items'})">My Items</a>
-         </li>
-         <li ng-if="!!user">
-            <a ui-sref="search">Search</a>
-         </li>
-      </ul>
-      <ul class="nav navbar-nav pull-right">
-         <li ng-if="!!user" class="navbar-text">
-            {{user.firstName + " " + user.lastName}}
-         </li>
-         <li>
-            <a ng-if="!!user" ui-sref="logout">Logout</a>
-         </li>
-      </ul>
-      
-   </nav>
-   <ui-view/>
+   <!--<md-toolbar>-->
+      <!--<h1>HELLO</h1>-->
+   <!--</md-toolbar>-->
+   <!--<md-sidenav md-component-id="left" class="md-sidenav-left" md-is-locked-open="$mdMedia('gt-md')">-->
+      <!--Left Nav!-->
+   <!--</md-sidenav>-->
+   <div id="wrapper" class="toggled">
+
+      <!-- Sidebar -->
+      <div id="sidebar-wrapper">
+         <ul class="sidebar-nav">
+            <li class="sidebar-brand">
+               <a href="#">
+                  EBList
+               </a>
+            </li>
+            <li ng-repeat="cat in categories">
+               <a ui-sref="items({pageTitle: cat.name,
+                getItemsUrl: 'Users/' + {{user.id}} + '/Items'})">{{cat.name}}</a>
+            </li>
+         </ul>
+      </div>
+      <nav class="navbar navbar-default">
+         <ul class="nav navbar-nav">
+            <li ng-if="!user">
+               <a ui-sref="login">Login</a>
+            </li>
+            <li ng-if="!user">
+               <a ui-sref="register">Register</a>
+            </li>
+            <li ng-if="!!user">
+               <a ui-sref="profile">My Profile</a>
+            </li>
+            <li ng-if="!!user">
+               <a ui-sref="items({pageTitle: 'My Items',
+                getItemsUrl: 'Users/' + {{user.id}} + '/Items'})">My Items</a>
+            </li>
+            <li ng-if="!!user">
+               <a ui-sref="search">Search</a>
+            </li>
+         </ul>
+         <ul class="nav navbar-nav pull-right">
+            <li ng-if="!!user" class="navbar-text">
+               {{user.firstName + " " + user.lastName}}
+            </li>
+            <li>
+               <a ng-if="!!user" ui-sref="logout">Logout</a>
+            </li>
+         </ul>
+      </nav>
+      <ui-view/>
+   </div>
 </body>
 </html>

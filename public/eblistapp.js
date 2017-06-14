@@ -1,8 +1,17 @@
 
 var app = angular.module('mainApp', [
    'ui.router',
-   'ui.bootstrap'
-]);
+   'ui.bootstrap',
+   'ngMaterial'
+]).run(function($rootScope, $http) {
+   $rootScope.categories = {};
+
+   $http.get("Categories")
+   .then(function(resp) {
+      console.log(resp.data);
+      $rootScope.categories = resp.data;
+   });
+});
 
 app.constant("errMap", {
    en: {
